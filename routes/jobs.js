@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const axios = require('axios').default;
-const { db } = require('../firebaseInit');
+const { db } = require('../firebase-auth/firebaseInit');
 
 // middleware that is specific to this router
 router.use((req, res, next) => {
