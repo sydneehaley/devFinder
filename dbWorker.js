@@ -1,6 +1,6 @@
 const { parentPort } = require('worker_threads');
 
-const { db } = require('./firebaseInit');
+const { db } = require('./firebase-auth/firebaseInit');
 
 // get current data in DD-MM-YYYY format
 let date = new Date();
