@@ -1,5 +1,5 @@
 const express = require('express');
-const port = 5000;
+// const port = 5000;
 const app = express();
 var path = require('path');
 require('dotenv').config();
@@ -18,6 +18,6 @@ app.use('/jobs', jobs);
 
 app.use('/public', express.static('./public/'));
 
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+app.listen(process.env.PORT || 5000, function () {
+  console.log('Express server listening on port %d in %s mode', this.address().port, app.settings.env);
 });
