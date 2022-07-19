@@ -1,5 +1,5 @@
 // api url
-const url = 'http://localhost:5000/jobs';
+const url = 'http://localhost:5000/jobs/data';
 
 async function fetchData() {
   let response = await fetch(url);

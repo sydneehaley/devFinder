@@ -15,7 +15,6 @@ router.get('/', async (req, res) => {
     .doc('Data')
     .onSnapshot((doc) => {
       res.status(200).json(doc.data());
-      //   console.log('Current data: ', doc.data());
     });
 });
 
