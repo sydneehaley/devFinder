@@ -1,6 +1,6 @@
 # devFinder
 
-A job board for web and software developers.
+A job board for software engineers.
 
 ## Author
 
