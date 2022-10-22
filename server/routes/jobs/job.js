@@ -1,7 +1,7 @@
 const router = require('express').Router({ mergeParams: true });
-const { json } = require('express');
+const { prisma } = require('../../../lib/hello-prisma/prisma/client/client');
 // const axios = require('axios').default;
-const { db } = require('../database/sql_db');
+// const { db } = require('../database/sql_db');
 
 //middleware that is specific to this router
 router.use((req, res, next) => {
@@ -16,20 +16,26 @@ router.param('id', (req, res, next, projId) => {
   next();
 });
 
-const jobRouter = router.get('/', (req, res) => {
-  db.query('SELECT * FROM jobs', function (err, result) {
-    if (err) throw err;
-    const empty_res = { job_id: null };
-    const filtered_res = result.filter((data) => {
-      return data.job_id == req.params.id;
-    });
+const jobRouter = router.get('/', async (req, res) => {
+  // db.query('SELECT * FROM jobs', function (err, result) {
+  //   if (err) throw err;
+  //   const empty_res = { job_id: null };
+  //   const filtered_res = result.filter((data) => {
+  //     return data.job_id == req.params.id;
+  //   });
 
-    if (filtered_res.length !== 0) {
-      res.status(200).send(filtered_res);
-    } else {
-      res.status(200).json(empty_res);
-    }
+  //   if (filtered_res.length !== 0) {
+  //     res.status(200).send(filtered_res);
+  //   } else {
+  //     res.status(200).json(empty_res);
+  //   }
+  // });
+  const jobs = await prisma.jobs.findUnique({
+    where: {
+      job_id: req.params.id,
+    },
   });
+  res.status(200).json(jobs);
 });
 
 module.exports = { jobRouter };
