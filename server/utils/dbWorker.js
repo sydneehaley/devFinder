@@ -1,11 +1,7 @@
 const { parentPort } = require("worker_threads");
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const { prisma } = require("../../lib/hello-prisma/prisma/client/client");
 
 // const { db } = require('../routes/database/sql_db');
-
-// let date = new Date();
-// let currDate = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
 
 // recieve crawled data from main thread
 const createJob = () => {
