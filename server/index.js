@@ -1,12 +1,12 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const api = require('./routes');
-const { createApp } = require('./utils/app');
-const session = require('express-session');
-require('dotenv').config();
-const cors = require('cors');
+const api = require("./routes");
+const { createApp } = require("./utils/app");
+const session = require("express-session");
+require("dotenv").config();
+const cors = require("cors");
 const PORT = process.env.PORT || 3001;
-const { sendData } = require('./utils/scrape');
+const { sendData } = require("./utils/scrape");
 
 app.use(cors());
 
