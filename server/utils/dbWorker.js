@@ -1,12 +1,12 @@
-const { parentPort } = require('worker_threads');
-const { prisma } = require('../../lib/hello-prisma/prisma/client/client');
+const { parentPort } = require("worker_threads");
+const { prisma } = require("../../lib/prisma/client/client");
 
 // const { db } = require('../routes/database/sql_db');
 
 // recieve crawled data from main thread
 const createJob = () => {
-  parentPort.once('message', (message) => {
-    console.log('Recieved data from mainWorker...');
+  parentPort.once("message", (message) => {
+    console.log("Recieved data from mainWorker...");
 
     // for (let i = 0; i < message.length; i++) {
     //   let sql = 'INSERT INTO jobs (job_company, job_description, job_link,job_title, job_type) VALUES ?';
