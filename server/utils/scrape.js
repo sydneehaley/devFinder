@@ -1,14 +1,16 @@
-const _ = require("lodash");
-const puppeteer = require("puppeteer");
-const { Worker, isMainThread, parentPort } = require("worker_threads");
-const workDir = __dirname + "/dbWorker.js";
+const _ = require('lodash');
+const puppeteer = require('puppeteer');
+const { Worker, isMainThread, parentPort } = require('worker_threads');
+const workDir = __dirname + '/dbWorker.js';
 
-const query = "software%20developer%20web%20developer";
-const remote_fulltime = "0kf%3Aattr(DSQF7)jt(fulltime)";
+const query = 'software%20developer%20web%20developer';
+const remote_fulltime = '0kf%3Aattr(DSQF7)jt(fulltime)';
 const fromage = 7;
-const vjk = "2b718e351fc30852";
+const vjk = '2b718e351fc30852';
 
 const url = `https://www.indeed.com/jobs?q=${query}&sc=${remote_fulltime}&fromage=${fromage}`;
+
+console.log(url);
 
 const fetchData = async () => {
   const browser = await puppeteer.launch({ headless: true });
@@ -26,14 +28,14 @@ const fetchData = async () => {
     //   description: x.innerText,
     // }));
 
-    const companies = document.querySelectorAll("span.companyName");
+    const companies = document.querySelectorAll('span.companyName');
 
     const getJobCompanies = [];
 
     companies.forEach((company, i) => {
       const makeObject = {
         index: Number(),
-        company: "",
+        company: '',
       };
       const jobLinksObj = Object.create(makeObject);
       jobLinksObj.index = i;
@@ -41,14 +43,14 @@ const fetchData = async () => {
       getJobCompanies.push(jobLinksObj);
     });
 
-    const descriptions = document.querySelectorAll(".job-snippet > ul");
+    const descriptions = document.querySelectorAll('.job-snippet > ul');
 
     const getJobDescriptions = [];
 
     descriptions.forEach((description, i) => {
       const makeObject = {
         index: Number(),
-        description: "",
+        description: '',
       };
       const jobLinksObj = Object.create(makeObject);
       jobLinksObj.index = i;
@@ -56,14 +58,14 @@ const fetchData = async () => {
       getJobDescriptions.push(jobLinksObj);
     });
 
-    const locations = document.querySelectorAll("div.companyLocation");
+    const locations = document.querySelectorAll('div.companyLocation');
 
     const getJobLocations = [];
 
     locations.forEach((location, i) => {
       const makeObject = {
         index: Number(),
-        location: "",
+        location: '',
       };
       const jobLinksObj = Object.create(makeObject);
       jobLinksObj.index = i;
@@ -71,14 +73,14 @@ const fetchData = async () => {
       getJobLocations.push(jobLinksObj);
     });
 
-    const titles = document.querySelectorAll("h2.css-bdjp2m");
+    const titles = document.querySelectorAll('h2.css-bdjp2m');
 
     const getJobTitles = [];
 
     titles.forEach((title, i) => {
       const makeObject = {
         index: Number(),
-        title: "",
+        title: '',
       };
       const jobLinksObj = Object.create(makeObject);
       jobLinksObj.index = i;
@@ -86,14 +88,14 @@ const fetchData = async () => {
       getJobTitles.push(jobLinksObj);
     });
 
-    const links = document.querySelectorAll("a.css-jspxzf");
+    const links = document.querySelectorAll('a.css-jspxzf');
 
     const getJobUrls = [];
 
     links.forEach((link, i) => {
       const makeObject = {
         index: Number(),
-        link: "",
+        link: '',
       };
       const jobLinksObj = Object.create(makeObject);
       jobLinksObj.index = i;
@@ -101,6 +103,7 @@ const fetchData = async () => {
       getJobUrls.push(jobLinksObj);
     });
 
+    console.log('the data is:' + getJobCompanies);
     return { getJobCompanies, getJobDescriptions, getJobLocations, getJobTitles, getJobUrls };
   });
 
@@ -143,22 +146,20 @@ const formatSendData = (res) => {
   });
 
   const jobs_data = _.map(mergeDescriptions, function (item) {
-    return _.assign({ type: "Full-time" }, _.find(mergeDescriptions, { index: item.index }));
+    return _.assign({ type: 'Full-time' }, _.find(mergeDescriptions, { index: item.index }));
   });
 
   const test_data = [
     {
-      company: "Google",
-      description: "This is a new job at google",
-      link: "http://google.com",
-      type: "Fullstack",
-      title: "Software Engineer",
+      company: 'Google',
+      description: 'This is a new job at google',
+      link: 'http://google.com',
+      type: 'Fullstack',
+      title: 'Software Engineer',
     },
   ];
 
-  // console.log(jobs_data);
-  console.log(test_data);
-  dataToDatabase({ test_data });
+  // dataToDatabase({ test_data });
 
   return jobs_data;
 };
@@ -166,11 +167,11 @@ const formatSendData = (res) => {
 const dataToDatabase = ({ test_data }) => {
   // start worker
   const worker = new Worker(workDir);
-  console.log("Sending crawled data to dbWorker...");
+  console.log('Sending crawled data to dbWorker...');
   // send formatted data to worker thread
   worker.postMessage(test_data);
   // listen to message from worker thread
-  worker.on("message", (message) => {
+  worker.on('message', (message) => {
     console.log(message);
   });
 };

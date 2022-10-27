@@ -1,5 +1,5 @@
 const { parentPort } = require('worker_threads');
-const { prisma } = require('../../lib/hello-prisma/prisma/client/client');
+const { prisma } = require('../../lib/prisma/client/client');
 
 // const { db } = require('../routes/database/sql_db');
 
