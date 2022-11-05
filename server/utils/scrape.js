@@ -149,17 +149,19 @@ const formatSendData = (res) => {
     return _.assign({ type: 'Full-time' }, _.find(mergeDescriptions, { index: item.index }));
   });
 
-  const test_data = [
-    {
-      company: 'Google',
-      description: 'This is a new job at google',
-      link: 'http://google.com',
-      type: 'Fullstack',
-      title: 'Software Engineer',
-    },
-  ];
+  // const test_data = [
+  //   {
+  //     company: "Google",
+  //     description: "This is a new job at google",
+  //     link: "http://google.com",
+  //     type: "Fullstack",
+  //     title: "Software Engineer",
+  //   },
+  // ];
 
-  // dataToDatabase({ test_data });
+  // console.log(jobs_data);
+  console.log(jobs_data);
+  // dataToDatabase({ jobs_data });
 
   return jobs_data;
 };
