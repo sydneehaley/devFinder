@@ -48,16 +48,25 @@ var puppeteer_1 = require("puppeteer");
                 return [4 /*yield*/, browser.newPage()];
             case 2:
                 page = _a.sent();
-                return [4 /*yield*/, page.goto('https://indeed.com')];
+                return [4 /*yield*/, page.setViewport({
+                        width: 1200,
+                        height: 1000,
+                        deviceScaleFactor: 1
+                    })];
             case 3:
                 _a.sent();
-                // Type into search box.
-                return [4 /*yield*/, page.type('.icl-TextInput-control', 'Software Engineer')];
+                return [4 /*yield*/, page.goto("https://indeed.com", { waitUntil: "load" })];
             case 4:
-                // Type into search box.
                 _a.sent();
-                return [4 /*yield*/, browser.close()];
+                // Type into search box.
+                // const search = await page.$('input > [aria-labelledby="label-text-input-what"]');
+                return [4 /*yield*/, page.type('input > [aria-labelledby="label-text-input-what"]', "Software Engineer")];
             case 5:
+                // Type into search box.
+                // const search = await page.$('input > [aria-labelledby="label-text-input-what"]');
+                _a.sent();
+                return [4 /*yield*/, page.click(".yosegi-InlineWhatWhere-primaryButton")];
+            case 6:
                 _a.sent();
                 return [2 /*return*/];
         }
