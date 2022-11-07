@@ -39,7 +39,7 @@ exports.__esModule = true;
 // const puppeteer = require('puppeteer');
 var puppeteer_1 = require("puppeteer");
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var browser, page;
+    var browser, page, titlesSelector, companiesSelector, locationsSelector, shiftsSelector, linksSelector, titles, companies, locations, shifts, links;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, puppeteer_1["default"].launch({ headless: false })];
@@ -48,17 +48,128 @@ var puppeteer_1 = require("puppeteer");
                 return [4 /*yield*/, browser.newPage()];
             case 2:
                 page = _a.sent();
-                return [4 /*yield*/, page.goto('https://indeed.com')];
+                return [4 /*yield*/, page.setViewport({
+                        width: 1200,
+                        height: 1000,
+                        deviceScaleFactor: 1
+                    })];
             case 3:
                 _a.sent();
-                // Type into search box.
-                return [4 /*yield*/, page.type('.icl-TextInput-control', 'Software Engineer')];
+                return [4 /*yield*/, page.goto('https://indeed.com', { waitUntil: 'load' })];
             case 4:
+                _a.sent();
+                // Type into search box.
+                return [4 /*yield*/, page.type('#text-input-what', 'Software Engineer')];
+            case 5:
                 // Type into search box.
                 _a.sent();
-                return [4 /*yield*/, browser.close()];
-            case 5:
+                return [4 /*yield*/, page.click('.yosegi-InlineWhatWhere-primaryButton')];
+            case 6:
                 _a.sent();
+                titlesSelector = '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.css-1m4cuuf.e37uo190 > h2';
+                return [4 /*yield*/, page.waitForSelector(titlesSelector)];
+            case 7:
+                _a.sent();
+                companiesSelector = '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > span.companyName';
+                return [4 /*yield*/, page.waitForSelector(companiesSelector)];
+            case 8:
+                _a.sent();
+                locationsSelector = '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > div';
+                return [4 /*yield*/, page.waitForSelector(locationsSelector)];
+            case 9:
+                _a.sent();
+                shiftsSelector = '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.tapItem-gutter.metadataContainer.noJEMChips.salaryOnly > div > div';
+                return [4 /*yield*/, page.waitForSelector(shiftsSelector)];
+            case 10:
+                _a.sent();
+                linksSelector = 'a.css-jspxzf';
+                return [4 /*yield*/, page.waitForSelector(linksSelector)];
+            case 11:
+                _a.sent();
+                return [4 /*yield*/, page.$$eval(titlesSelector, function (options) {
+                        var getJobTitles = [];
+                        options.forEach(function (title, i) {
+                            var makeObject = {
+                                index: Number(),
+                                title: ''
+                            };
+                            var jobLinksObj = Object.create(makeObject);
+                            jobLinksObj.index = i;
+                            jobLinksObj.title = title.textContent;
+                            getJobTitles.push(jobLinksObj);
+                        });
+                        return getJobTitles;
+                    })];
+            case 12:
+                titles = _a.sent();
+                return [4 /*yield*/, page.$$eval(companiesSelector, function (options) {
+                        var getJobCompanies = [];
+                        options.forEach(function (company, i) {
+                            var makeObject = {
+                                index: Number(),
+                                company: ''
+                            };
+                            var jobLinksObj = Object.create(makeObject);
+                            jobLinksObj.index = i;
+                            jobLinksObj.company = company.textContent;
+                            getJobCompanies.push(jobLinksObj);
+                        });
+                        return getJobCompanies;
+                    })];
+            case 13:
+                companies = _a.sent();
+                return [4 /*yield*/, page.$$eval(locationsSelector, function (options) {
+                        var getJobLocations = [];
+                        options.forEach(function (location, i) {
+                            var makeObject = {
+                                index: Number(),
+                                location: ''
+                            };
+                            var jobLinksObj = Object.create(makeObject);
+                            jobLinksObj.index = i;
+                            jobLinksObj.location = location.textContent;
+                            getJobLocations.push(jobLinksObj);
+                        });
+                        return getJobLocations;
+                    })];
+            case 14:
+                locations = _a.sent();
+                return [4 /*yield*/, page.$$eval(shiftsSelector, function (options) {
+                        var getShiftsLocations = [];
+                        options.forEach(function (shift, i) {
+                            var makeObject = {
+                                index: Number(),
+                                shift: ''
+                            };
+                            var jobLinksObj = Object.create(makeObject);
+                            jobLinksObj.index = shift.textContent;
+                            getShiftsLocations.push(jobLinksObj);
+                        });
+                        return getShiftsLocations;
+                    })];
+            case 15:
+                shifts = _a.sent();
+                return [4 /*yield*/, page.$$eval(linksSelector, function (options) {
+                        var getLinksLocations = [];
+                        options.forEach(function (link, i) {
+                            var makeObject = {
+                                index: Number(),
+                                link: ''
+                            };
+                            var jobLinksObj = Object.create(makeObject);
+                            jobLinksObj.index = i;
+                            jobLinksObj.link = link.getAttribute('href');
+                            getLinksLocations.push(jobLinksObj);
+                        });
+                        return getLinksLocations;
+                    })];
+            case 16:
+                links = _a.sent();
+                console.log(titles);
+                console.log(companies);
+                console.log(locations);
+                console.log(shifts);
+                console.log(links);
                 return [2 /*return*/];
         }
     });
