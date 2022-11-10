@@ -12,9 +12,10 @@ model Jobs {
   company     String?
   link        String?
   createdOn   DateTime @default(now())
-  description String?
-  type        String?
+  shift String?
+  location       String?
   title       String?
+  index  Int
 
   @@map("jobs")
 }

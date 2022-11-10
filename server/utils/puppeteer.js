@@ -38,9 +38,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 // const puppeteer = require('puppeteer');
 var puppeteer_1 = require("puppeteer");
-var _ = require("lodash");
-var _a = require("worker_threads"), Worker = _a.Worker, isMainThread = _a.isMainThread, parentPort = _a.parentPort;
-var workDir = __dirname + "/dbWorker.js";
+var _ = require('lodash');
+var _a = require('worker_threads'), Worker = _a.Worker, isMainThread = _a.isMainThread, parentPort = _a.parentPort;
+var workDir = __dirname + '/dbWorker.js';
 var fetchData = function () { return __awaiter(void 0, void 0, void 0, function () {
     var browser, page, titlesSelector, companiesSelector, locationsSelector, shiftsSelector, linksSelector, titles, companies, locations, shifts, links;
     return __generator(this, function (_a) {
@@ -58,34 +58,34 @@ var fetchData = function () { return __awaiter(void 0, void 0, void 0, function 
                     })];
             case 3:
                 _a.sent();
-                return [4 /*yield*/, page.goto("https://indeed.com", { waitUntil: "load" })];
+                return [4 /*yield*/, page.goto('https://indeed.com', { waitUntil: 'load' })];
             case 4:
                 _a.sent();
                 // Type into search box.
-                return [4 /*yield*/, page.type("#text-input-what", "Software Engineer")];
+                return [4 /*yield*/, page.type('#text-input-what', 'Software Engineer')];
             case 5:
                 // Type into search box.
                 _a.sent();
-                return [4 /*yield*/, page.click(".yosegi-InlineWhatWhere-primaryButton")];
+                return [4 /*yield*/, page.click('.yosegi-InlineWhatWhere-primaryButton')];
             case 6:
                 _a.sent();
-                titlesSelector = "#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.css-1m4cuuf.e37uo190 > h2";
+                titlesSelector = '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.css-1m4cuuf.e37uo190 > h2';
                 return [4 /*yield*/, page.waitForSelector(titlesSelector)];
             case 7:
                 _a.sent();
-                companiesSelector = "#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > span.companyName";
+                companiesSelector = '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > span.companyName';
                 return [4 /*yield*/, page.waitForSelector(companiesSelector)];
             case 8:
                 _a.sent();
-                locationsSelector = "#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > div";
+                locationsSelector = '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > div';
                 return [4 /*yield*/, page.waitForSelector(locationsSelector)];
             case 9:
                 _a.sent();
-                shiftsSelector = "#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.tapItem-gutter.metadataContainer.noJEMChips.salaryOnly > div > div";
+                shiftsSelector = '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.tapItem-gutter.metadataContainer.noJEMChips.salaryOnly > div > div';
                 return [4 /*yield*/, page.waitForSelector(shiftsSelector)];
             case 10:
                 _a.sent();
-                linksSelector = "a.css-jspxzf";
+                linksSelector = 'a.css-jspxzf';
                 return [4 /*yield*/, page.waitForSelector(linksSelector)];
             case 11:
                 _a.sent();
@@ -146,7 +146,7 @@ var fetchData = function () { return __awaiter(void 0, void 0, void 0, function 
                         options.forEach(function (link, i) {
                             var links = {
                                 index: i,
-                                link: link.textContent
+                                link: link.getAttribute('href')
                             };
                             getLinksLocations.push(links);
                         });
@@ -158,7 +158,19 @@ var fetchData = function () { return __awaiter(void 0, void 0, void 0, function 
         }
     });
 }); };
-var formatData = function (res) {
+var dataToDatabase = function (mergeTitles) {
+    if (mergeTitles === void 0) { mergeTitles = []; }
+    // start worker
+    var worker = new Worker(workDir);
+    console.log('Sending crawled data to dbWorker...' + Array.isArray(mergeTitles));
+    // send formatted data to worker thread
+    worker.postMessage(mergeTitles);
+    // listen to message from worker thread
+    worker.on('message', function (message) {
+        console.log(message);
+    });
+};
+var formatSendData = function (res) {
     var companies = res.companies, links = res.links, locations = res.locations, shifts = res.shifts, titles = res.titles;
     var mergeLinks = _.map(companies, function (item) {
         return _.assign(item, _.find(links, { index: item.index }));
@@ -169,18 +181,20 @@ var formatData = function (res) {
     var mergeShifts = _.map(mergeLocations, function (item) {
         return _.assign(item, _.find(shifts, { index: item.index }));
     });
-    var mergeTitles = _.map(mergeShifts, function (item) {
+    var mergeTitles = (_.map(mergeShifts, function (item) {
         return _.assign(item, _.find(titles, { index: item.index }));
-    });
-    console.log(mergeTitles);
+    }));
+    dataToDatabase(mergeTitles);
+    return mergeTitles;
 };
 var sendData = function () {
     fetchData()
         .then(function (res) {
-        console.log(res);
+        formatSendData(res);
     })["catch"](function (err) {
         console.log(err);
         return err;
     });
 };
 sendData();
+module.exports = { sendData: sendData };

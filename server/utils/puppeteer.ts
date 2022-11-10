@@ -1,16 +1,24 @@
 // const puppeteer = require('puppeteer');
-import puppeteer from "puppeteer";
-import internal from "stream";
-const _ = require("lodash");
-const { Worker, isMainThread, parentPort } = require("worker_threads");
-const workDir = __dirname + "/dbWorker.js";
+import puppeteer, { TargetFilterCallback } from 'puppeteer';
+const _ = require('lodash');
+const { Worker, isMainThread, parentPort } = require('worker_threads');
+const workDir = __dirname + '/dbWorker.js';
 
 interface IndeedJobs {
-  companies: [{ index: number; company: string | null }];
-  links: [{ index: number; link: string | null }];
-  locations: [{ index: number; location: string | null }];
-  shifts: [{ index: number; shift: string | null }];
-  titles: [{ index: number; title: string | null }];
+  companies: Object[];
+  links: Object[];
+  locations: Object[];
+  shifts: Object[];
+  titles: Object[];
+}
+
+interface Job {
+  index: number;
+  company: string;
+  link: string;
+  location: string;
+  shift: string;
+  title: string;
 }
 
 const fetchData = async () => {
@@ -22,29 +30,29 @@ const fetchData = async () => {
     deviceScaleFactor: 1,
   });
 
-  await page.goto("https://indeed.com", { waitUntil: "load" });
+  await page.goto('https://indeed.com', { waitUntil: 'load' });
 
   // Type into search box.
-  await page.type("#text-input-what", "Software Engineer");
-  await page.click(".yosegi-InlineWhatWhere-primaryButton");
+  await page.type('#text-input-what', 'Software Engineer');
+  await page.click('.yosegi-InlineWhatWhere-primaryButton');
 
   const titlesSelector =
-    "#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.css-1m4cuuf.e37uo190 > h2";
+    '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.css-1m4cuuf.e37uo190 > h2';
   await page.waitForSelector(titlesSelector);
 
   const companiesSelector =
-    "#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > span.companyName";
+    '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > span.companyName';
   await page.waitForSelector(companiesSelector);
 
   const locationsSelector =
-    "#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > div";
+    '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.company_location.tapItem-gutter.companyInfo > div';
   await page.waitForSelector(locationsSelector);
 
   const shiftsSelector =
-    "#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.tapItem-gutter.metadataContainer.noJEMChips.salaryOnly > div > div";
+    '#mosaic-provider-jobcards > ul > li > div > div.slider_container.css-g7s71f.eu4oa1w0 > div > div.slider_item.css-kyg8or.eu4oa1w0 > div > table.jobCard_mainContent.big6_visualChanges > tbody > tr > td > div.heading6.tapItem-gutter.metadataContainer.noJEMChips.salaryOnly > div > div';
   await page.waitForSelector(shiftsSelector);
 
-  const linksSelector = "a.css-jspxzf";
+  const linksSelector = 'a.css-jspxzf';
   await page.waitForSelector(linksSelector);
 
   const titles: Object[] = await page.$$eval(titlesSelector, (options) => {
@@ -105,7 +113,7 @@ const fetchData = async () => {
     options.forEach((link, i) => {
       const links: { index: number; link: string | null } = {
         index: i,
-        link: link.textContent,
+        link: link.getAttribute('href'),
       };
       getLinksLocations.push(links);
     });
@@ -115,7 +123,20 @@ const fetchData = async () => {
   return { companies, links, locations, shifts, titles };
 };
 
-const formatData = (res: IndeedJobs): any => {
+const dataToDatabase = (mergeTitles: Job[] = []) => {
+  // start worker
+  const worker = new Worker(workDir);
+  console.log('Sending crawled data to dbWorker...');
+
+  // send formatted data to worker thread
+  worker.postMessage(mergeTitles);
+  // listen to message from worker thread
+  worker.on('message', (message: string) => {
+    console.log(message);
+  });
+};
+
+const formatSendData = (res: IndeedJobs): any => {
   const { companies, links, locations, shifts, titles } = res;
 
   const mergeLinks = _.map(companies, function (item: any) {
@@ -130,18 +151,18 @@ const formatData = (res: IndeedJobs): any => {
     return _.assign(item, _.find(shifts, { index: item.index }));
   });
 
-  const mergeTitles = _.map(mergeShifts, function (item: any) {
+  const mergeTitles: Job[] = ([] = _.map(mergeShifts, function (item: any) {
     return _.assign(item, _.find(titles, { index: item.index }));
-  });
+  }));
 
-  console.log(mergeTitles);
+  dataToDatabase(mergeTitles);
   return mergeTitles;
 };
 
 const sendData = () => {
   fetchData()
     .then((res) => {
-      formatData(res);
+      formatSendData(res);
     })
     .catch((err) => {
       console.log(err);
@@ -150,3 +171,5 @@ const sendData = () => {
 };
 
 sendData();
+
+module.exports = { sendData };
