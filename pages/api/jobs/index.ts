@@ -1,5 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../../lib/prisma/client/client';
+import type { NextApiRequest, NextApiResponse } from "next";
+import prisma from "../../../lib/prisma/client/client";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const jobs = await prisma.jobs.findMany();
