@@ -1,7 +1,4 @@
 "use strict";
-// const { parentPort } = require('worker_threads');
-// const { prisma } = require('../../lib/prisma/client/client');
-// const { db } = require('../routes/database/sql_db');
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -39,41 +36,46 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+// const { db } = require('../routes/database/sql_db');
 var client_1 = require("../../lib/prisma/client/client");
 var worker_threads_1 = require("worker_threads");
 // recieve crawled data from main thread
-var createJob = function () {
-    worker_threads_1.parentPort.once('message', function (message) {
-        console.log('Recieved data from mainWorker...');
-        // for (let i = 0; i < message.length; i++) {
-        //   let sql = 'INSERT INTO jobs (job_company, job_description, job_link,job_title, job_type) VALUES ?';
-        //   var values = [[message[i].company, message[i].description, message[i].link, message[i].title, message[i].type]];
-        //   db.query(sql, [values], function (err, result) {
-        //     if (err) throw err;
-        //     console.log('Number of records inserted: ' + result.affectedRows);
-        //     if (result) {
-        //       parentPort.postMessage('Data saved successfully');
-        //     }
-        //   });
-        // }
-        // db.end();
-        var data = message;
-        var newJob = function () { return __awaiter(void 0, void 0, void 0, function () {
-            var user;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, client_1["default"].jobs.createMany({
-                            data: data,
-                            skipDuplicates: true
-                        })];
-                    case 1:
-                        user = _a.sent();
-                        worker_threads_1.parentPort.postMessage('Data stored successfully');
-                        return [2 /*return*/];
-                }
-            });
-        }); };
-        newJob();
-    });
+var storeJobs = function () {
+    if (worker_threads_1.parentPort !== null) {
+        worker_threads_1.parentPort.once('message', function (message) {
+            console.log('Recieved data from mainWorker...');
+            // for (let i = 0; i < message.length; i++) {
+            //   let sql = 'INSERT INTO jobs (job_company, job_description, job_link,job_title, job_type) VALUES ?';
+            //   var values = [[message[i].company, message[i].description, message[i].link, message[i].title, message[i].type]];
+            //   db.query(sql, [values], function (err, result) {
+            //     if (err) throw err;
+            //     console.log('Number of records inserted: ' + result.affectedRows);
+            //     if (result) {
+            //       parentPort.postMessage('Data saved successfully');
+            //     }
+            //   });
+            // }
+            // db.end();
+            var data = message;
+            var newJobs = function () { return __awaiter(void 0, void 0, void 0, function () {
+                var user;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0: return [4 /*yield*/, client_1["default"].jobs.createMany({
+                                data: data,
+                                skipDuplicates: true
+                            })];
+                        case 1:
+                            user = _a.sent();
+                            if (worker_threads_1.parentPort !== null) {
+                                worker_threads_1.parentPort.postMessage('Data stored successfully');
+                            }
+                            return [2 /*return*/];
+                    }
+                });
+            }); };
+            newJobs();
+        });
+    }
 };
-createJob();
+storeJobs();

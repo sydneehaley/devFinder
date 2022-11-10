@@ -162,7 +162,7 @@ var dataToDatabase = function (mergeTitles) {
     if (mergeTitles === void 0) { mergeTitles = []; }
     // start worker
     var worker = new Worker(workDir);
-    console.log('Sending crawled data to dbWorker...' + Array.isArray(mergeTitles));
+    console.log('Sending crawled data to dbWorker...');
     // send formatted data to worker thread
     worker.postMessage(mergeTitles);
     // listen to message from worker thread
