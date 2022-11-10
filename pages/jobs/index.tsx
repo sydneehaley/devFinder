@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
+import Layout from "../../components/jobs/Layout";
 
 const Jobs: NextPage = () => {
-  return <div className='text-red-500'>Job Board here</div>;
+  return <Layout>Job Board here</Layout>;
 };
 
 export default Jobs;
