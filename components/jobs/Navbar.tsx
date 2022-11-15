@@ -1,10 +1,14 @@
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { BellIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+
+// border-b border-neutral-700/40
 
 const Navbar: NextPage = () => {
   const router = useRouter();
   return (
-    <div className='w-full h-[8vh] border-b border-neutral-700/40 flex justify-center items-center'>
+    <div className='w-full h-[7vh] border-b border-neutral-700/40 flex justify-center items-center'>
       <div className='w-[82%] flex h-full justify-center items-center'>
         <div className='text-white font-sans font-bold w-[33.3%]'>
           <div className='w-full flex items-center'>
@@ -26,43 +30,24 @@ const Navbar: NextPage = () => {
         </div>
         <div className='w-[33.3%] h-full flex  justify-center '>
           <ul className='w-[65%] h-full flex  justify-between font-medium text-[1.14rem]'>
-            <li className={router.pathname == '/jobs' ? 'border-b border-white flex items-center' : 'flex items-center'}>Jobs</li>
-            <li className={router.pathname == '/jobs/employers' ? 'border-b border-white flex items-center' : ' flex items-center'}>Employers</li>
-            <li className={router.pathname == '/jobs/resources' ? 'border-b border-white flex items-center' : 'flex items-center'}>Resources</li>
+            <li className={router.pathname == '/jobs' ? 'text-white font-semibold flex items-center' : 'text-white/20  flex items-center'}>Jobs</li>
+            <li className={router.pathname == '/jobs/employers' ? 'font-semibold flex items-center' : 'text-white/20  flex items-center'}>
+              Employers
+            </li>
+            <li className={router.pathname == '/jobs/resources' ? 'font-semibold flex items-center' : 'text-white/20  flex items-center'}>
+              Resources
+            </li>
           </ul>
         </div>
         <div className='w-[33.3%] h-full flex items-center'>
           <div className='w-full flex items-center justify-center'>
             <div className='w-[90%] flex h-full items-center justify-end pr-[1rem]'>
               <div className='w-[15%] flex items-center justify-center'>
-                <svg width='18px' height='18px' viewBox='0 0 100 100' version='1.1' xmlns='http://www.w3.org/2000/svg'>
-                  <g stroke='currentColor' stroke-width='2' fill='none' fill-rule='evenodd' stroke-linecap='round' stroke-linejoin='round'>
-                    <g transform='translate(2.000000, 2.000000)' stroke='currentColor' stroke-width='4'>
-                      <path
-                        d='M40,80 C62.09139,80 80,62.09139 80,40 C80,17.90861 62.09139,0 40,0 C17.90861,0 0,17.90861 0,40 C0,62.09139 17.90861,80 40,80 Z'
-                        id='Layer-1'
-                      ></path>
-                      <path d='M96,96 L68.4954549,68.4954549' id='Layer-2'></path>
-                    </g>
-                  </g>
-                </svg>
+                <MagnifyingGlassIcon className='h-7 w-7 text-currentColor' />
               </div>
 
               <div className='w-[15%] flex items-center justify-center'>
-                <svg width='18px' height='18px' viewBox='0 0 100 100' version='1.1' xmlns='http://www.w3.org/2000/svg'>
-                  <g transform='translate(2.000000, 3.000000)' stroke='currentColor' fill='none' stroke-width='4'>
-                    <path
-                      d='M1,82.6624363 C10.0657813,75.4737565 15.7929233,64.902803 15.7929233,53.117652 L15.7929233,38.411768 C15.7929233,22.1680971 30.2998277,9 48.1950012,9 C66.0901747,9 80.5970791,22.1680971 80.5970791,38.411768 L80.5970791,53.117652 C80.5970791,64.9028045 86.3242225,75.4737592 95.3899994,82.6624363'
-                      id='Layer-1'
-                    ></path>
-                    <ellipse id='Layer-2' cx='48' cy='84.6' rx='48' ry='9.6'></ellipse>
-                    <path
-                      d='M59.6423952,76 C58.7027212,81.6902897 53.7598241,86.0302232 47.8032814,86.0302232 C41.9187538,86.0302232 37.0235101,81.7945959 36,76.2057913'
-                      id='Layer-3'
-                    ></path>
-                    <path d='M38,10 C38,4.4771525 42.4771525,0 48,0 C53.5228475,0 58,4.4771525 58,10' id='Layer-4'></path>
-                  </g>
-                </svg>
+                <BellIcon className='h-7 w-7 text-currentColor' />
               </div>
             </div>
             <div className='flex items-center justify-center w-[10%]'>

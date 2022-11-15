@@ -8,9 +8,9 @@ type Props = {
 
 const Layout: NextPage<Props> = ({ children }) => {
   return (
-    <div className='bg-neutral-800 antialiased'>
+    <div className='bg-transparent antialiased'>
       <Navbar />
-      {children}
+      <div className='w-full flex flex-col items-center justify-center'>{children}</div>
     </div>
   );
 };
