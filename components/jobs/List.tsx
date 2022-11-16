@@ -16,15 +16,15 @@ const List: NextPage<Props> = ({ data }) => {
         <h1>Jobs</h1>
       </div>
       <div>
-        {data?.map((job: any, i: any) => (
-          <ul className='p-0 m-0'>
-            <li>
+        <ul className='p-0 m-0'>
+          {data?.map((job: any, i: any) => (
+            <li key={job?.job_id}>
               <div>
                 <h6>{job.title}</h6>
               </div>
             </li>
-          </ul>
-        ))}
+          ))}
+        </ul>
       </div>
     </div>
   );
