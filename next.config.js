@@ -2,6 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  env: {
+    GOOGLEMAPS_APIKEY: 'AIzaSyBvnKCSxxNksfhdLRQw0Vu6WgAdFo-KZAI',
+  },
   async redirects() {
     return [
       {

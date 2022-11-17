@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Layout from '../../components/jobs/Layout';
 import Search from '../../components/jobs/Search';
 import useSWR, { SWRConfig } from 'swr';
+import Filters from '../../components/jobs/Filters';
 import List from '../../components/jobs/List';
 import { InferGetServerSidePropsType } from 'next';
 import type { Fetcher } from 'swr';
@@ -30,7 +31,6 @@ const JobsList = () => {
   // there should be no `undefined` state
   console.log('Is data ready?', !!data);
   console.log(data);
-  console.log(typeof data === 'object');
 
   return (
     <div className='w-[82%] flex flex-col items-start justify-start'>
@@ -46,10 +46,13 @@ function Jobs({ fallback }: InferGetServerSidePropsType<typeof getServerSideProp
         <title>devFinder</title>
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <Search />
-      <SWRConfig value={{ fallback }}>
-        <JobsList />
-      </SWRConfig>
+
+      <div className='w-[82%] flex my-[5rem]'>
+        <Filters />
+        <SWRConfig value={{ fallback }}>
+          <JobsList />
+        </SWRConfig>
+      </div>
     </Layout>
   );
 }
