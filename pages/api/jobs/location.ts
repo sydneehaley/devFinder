@@ -7,7 +7,7 @@ export const config = {
   },
 };
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await new Promise((resolve, reject) => {
     const form = new formidable.IncomingForm();
 
@@ -23,3 +23,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     data,
   });
 };
+
+export default handler;
