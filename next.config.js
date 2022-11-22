@@ -4,6 +4,7 @@ const nextConfig = {
   swcMinify: true,
   env: {
     GOOGLEMAPS_APIKEY: process.env.GOOGLEMAPS_APIKEY,
+    GEOAPIFY_APIKEY: process.env.GEOAPIFY_APIKEY,
   },
   async redirects() {
     return [

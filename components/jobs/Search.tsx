@@ -1,22 +1,16 @@
 import type { NextPage } from 'next';
-import Geocode from 'react-geocode';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { MapPinIcon } from '@heroicons/react/24/outline';
-import { BriefcaseIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
 import { ClockIcon } from '@heroicons/react/24/outline';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import axios from 'axios';
 
 // bg-gradient-to-b from-green-500/40 to-blue-500/40 flex items-center justify-center
 
-const key = process.env.GOOGLEMAPS_APIKEY;
-console.log(key);
-
 const Search: NextPage = () => {
-  const [lat, setLat] = useState<any>(null);
-  const [lng, setLng] = useState<any>(null);
-  const [status, setStatus] = useState<any>(null);
+  const [cityData, setCityData] = useState<any>(null);
   const [city, setCity] = useState<any>(null);
 
   useEffect(() => {
@@ -26,38 +20,24 @@ const Search: NextPage = () => {
         console.log('Latitude is :', position.coords.latitude);
         console.log('Longitude is :', position.coords.longitude);
 
-        Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
-          (response: any) => {
-            let city, state, country;
-            for (let i = 0; i < response.results[0].address_components.length; i++) {
-              for (let j = 0; j < response.results[0].address_components[i].types.length; j++) {
-                switch (response.results[0].address_components[i].types[j]) {
-                  case 'locality':
-                    city = response.results[0].address_components[i].long_name;
-                    break;
-                  case 'administrative_area_level_1':
-                    state = response.results[0].address_components[i].long_name;
-                    break;
-                  case 'country':
-                    country = response.results[0].address_components[i].long_name;
-                    break;
-                }
-              }
-            }
-            setCity(city);
-            console.log(city, state, country);
-          },
-          (error: any) => {
-            console.error(error);
-          }
-        );
-      });
+        const config = {
+          method: 'get',
+          url: `https://api.geoapify.com/v1/geocode/reverse?lat=${position.coords.latitude}&lon=${position.coords.longitude}&apiKey=${process.env.GEOAPIFY_APIKEY}`,
+          headers: {},
+        };
 
-      Geocode.setApiKey(key);
-    } else {
-      console.log('Not Available');
+        axios(config)
+          .then(function (response) {
+            console.log(response.data);
+            setCityData(response.data);
+            setCity(response.data.features[0].properties.city);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      });
     }
-  });
+  }, []);
 
   return (
     <div className='w-full h-[40vh] bg-transparent border-b border-neutral-700/40 flex items-center justify-center'>
@@ -79,7 +59,7 @@ const Search: NextPage = () => {
                 <MapPinIcon className='h-6 w-6 text-green-500' />
                 <input
                   className='w-full w-[90%] bg-transparent placeholder:text-white/20 placeholder:text-[14px] placeholder:font-semibold pl-[1rem] outline-0'
-                  placeholder={city}
+                  placeholder={city === null ? 'Finding you...' : city}
                 ></input>
               </div>
             </div>

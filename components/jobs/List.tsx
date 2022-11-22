@@ -6,11 +6,6 @@ type Props = {
 };
 
 const List: NextPage<Props> = ({ data }) => {
-  // there should be no `undefined` state
-  console.log('Is data ready?', !!data);
-  console.log(data);
-  console.log(typeof data === 'object');
-
   return (
     <div className='w-full flex flex-col items-start justify-start'>
       <div className='mb-[3rem]'>

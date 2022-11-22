@@ -28,9 +28,7 @@ export async function getServerSideProps() {
 const JobsList = () => {
   const { data } = useSWR<any[]>(API);
 
-  // there should be no `undefined` state
   console.log('Is data ready?', !!data);
-  console.log(data);
 
   return (
     <div className='w-[82%] flex flex-col items-start justify-start'>

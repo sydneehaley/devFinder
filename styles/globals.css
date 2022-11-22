@@ -12,6 +12,9 @@
     @apply text-[12px];
   }
   /* ... */
+  #__next {
+    @apply h-full;
+  }
 }
 
 @import url('https://rsms.me/inter/inter.css');
