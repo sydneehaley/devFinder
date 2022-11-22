@@ -8,7 +8,7 @@ import { InferGetServerSidePropsType } from 'next';
 import type { Fetcher } from 'swr';
 
 const dev = process.env.NODE_ENV !== 'production';
-const server = dev ? 'http://localhost:3000' : 'https://your_deployment.server.com';
+const server = dev ? 'http://localhost:3000' : 'https://dev-finder-sydneehaley.vercel.app/';
 const fetcher: Fetcher<User, string> = (url) => fetch(url).then((res) => res.json());
 const API = `${server}/api/jobs`;
 
