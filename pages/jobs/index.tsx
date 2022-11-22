@@ -7,13 +7,15 @@ import List from '../../components/jobs/List';
 import { InferGetServerSidePropsType } from 'next';
 import type { Fetcher, Key } from 'swr';
 
-const dev = process.env.NODE_ENV !== 'production';
-const server = dev ? 'http://localhost:3000' : 'https://dev-finder-sydneehaley.vercel.app/';
-let API = `${server}/api/jobs`;
+// const dev = process.env.NODE_ENV !== 'production';
+// const server = dev ? 'http://localhost:3000' : 'https://dev-finder-sydneehaley.vercel.app/';
+// let API = `${server}/api/jobs`;
 
-if (global.window) {
-  API = '/api/jobs';
-}
+// if (global.window) {
+//   API = '/api/jobs';
+// }
+
+let API = '/api/jobs';
 
 const fetcher: Fetcher<User, string> = (...args) => fetch(...args).then((res) => res.json());
 
