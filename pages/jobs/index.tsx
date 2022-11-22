@@ -15,29 +15,26 @@ import type { Fetcher, Key } from 'swr';
 //   API = '/api/jobs';
 // }
 
-let API = '/api/jobs';
-
 const fetcher: Fetcher<User, string> = (...args) => fetch(...args).then((res) => res.json());
 
 type User = any;
 
-export async function getServerSideProps() {
-  const repoInfo = await fetcher(API);
-  return {
-    props: {
-      fallback: {
-        [API]: repoInfo,
-      },
-    },
-  };
-}
+// export async function getServerSideProps() {
+//   const repoInfo = await fetcher(API);
+//   return {
+//     props: {
+//       fallback: {
+//         [API]: repoInfo,
+//       },
+//     },
+//   };
+// }
 
 const JobsList = () => {
-  const { data } = useSWR<any[]>(API, fetcher);
+  const { data } = useSWR<any[]>('/api/jobs', fetcher);
 
   console.log('Is data ready?', !!data);
   console.log(data);
-  console.log(API);
 
   return (
     <div className='w-[82%] flex flex-col items-start justify-start'>
