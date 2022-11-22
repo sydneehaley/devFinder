@@ -15,9 +15,9 @@ import type { Fetcher, Key } from 'swr';
 //   API = '/api/jobs';
 // }
 
-const fetcher: Fetcher<User, string> = (...args) => fetch(...args).then((res) => res.json());
+const fetcher: Fetcher<Jobs, string> = (...args) => fetch(...args).then((res) => res.json());
 
-type User = any;
+type Jobs = any;
 
 // export async function getServerSideProps() {
 //   const repoInfo = await fetcher(API);
