@@ -7,17 +7,17 @@ import List from '../../components/jobs/List';
 import { InferGetServerSidePropsType } from 'next';
 import type { Fetcher, Key } from 'swr';
 
-// const dev = process.env.NODE_ENV !== 'production';
-// const server = dev ? 'http://localhost:3000' : 'https://dev-finder-sydneehaley.vercel.app/';
-// let API = `${server}/api/jobs`;
+const dev = process.env.NODE_ENV !== 'production';
+const server = dev ? 'http://localhost:3000' : 'https://dev-finder-sydneehaley.vercel.app/';
+let API = `${server}/api/jobs`;
 
 // if (global.window) {
 //   API = '/api/jobs';
 // }
 
-const fetcher: Fetcher<Jobs, string> = (...args) => fetch(...args).then((res) => res.json());
+// const fetcher: Fetcher<Jobs, string> = (...args) => fetch(...args).then((res) => res.json());
 
-type Jobs = any;
+// type Jobs = any;
 
 // export async function getServerSideProps() {
 //   const repoInfo = await fetcher(API);
@@ -30,10 +30,23 @@ type Jobs = any;
 //   };
 // }
 
-const JobsList = () => {
-  const { data } = useSWR<any[]>('/api/jobs', fetcher);
+export async function getServerSideProps() {
+  const res = await fetch(API);
+  const data = await res.json();
+  return {
+    props: {
+      data,
+    },
+  };
+}
 
-  console.log('Is data ready?', !!data);
+interface Props {
+  data: any;
+}
+
+const JobsList: React.FC<Props> = ({ data }) => {
+  // const { data } = useSWR<any[]>('/api/jobs', fetcher);
+  // console.log('Is data ready?', !!data);
   console.log(data);
 
   return (
@@ -43,7 +56,7 @@ const JobsList = () => {
   );
 };
 
-function Jobs() {
+function Jobs({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
     <Layout>
       <Head>
@@ -53,9 +66,7 @@ function Jobs() {
 
       <div className='w-[82%] flex my-[5rem]'>
         <Filters />
-        {/* <SWRConfig value={{ fallback }}> */}
-        <JobsList />
-        {/* </SWRConfig> */}
+        <JobsList data={data} />
       </div>
     </Layout>
   );
