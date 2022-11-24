@@ -57,8 +57,9 @@ interface Props {
 
 function JobsList() {
   const { data } = useSWR<any[]>(API);
-  // console.log('Is data ready?', !!data);
+  console.log('Is data ready?', !!data);
   console.log(data);
+  console.log(API);
 
   return (
     <div className='w-[82%] flex flex-col items-start justify-start'>
