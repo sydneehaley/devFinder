@@ -4,6 +4,5 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 A job board for software engineers. This fullstack web application uses Typescript, Node.js, Next.js, Prisma, Supabase (Postgres SQL), and Puppeteer.
 
-**Demo**
-
+**Demo** <br>
 [Vercel](http://dev-finder-sydneehaley.vercel.app)

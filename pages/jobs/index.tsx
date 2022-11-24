@@ -15,39 +15,48 @@ let API = `${server}/api/jobs`;
 //   API = '/api/jobs';
 // }
 
-// const fetcher: Fetcher<Jobs, string> = (...args) => fetch(...args).then((res) => res.json());
-
-// type Jobs = any;
-
-// export async function getServerSideProps() {
-//   const repoInfo = await fetcher(API);
-//   return {
-//     props: {
-//       fallback: {
-//         [API]: repoInfo,
-//       },
-//     },
-//   };
-// }
-
-console.log(process.env.NODE_ENV !== 'production');
+type Jobs = any;
+const fetcher: Fetcher<Jobs, string> = (...args) => fetch(...args).then((res) => res.json());
 
 export async function getServerSideProps() {
-  const res = await fetch(API);
-  const data = await res.json();
+  const jobs = await fetcher(API);
   return {
     props: {
-      data,
+      fallback: {
+        [API]: jobs,
+      },
     },
   };
 }
+
+// export async function getServerSideProps() {
+//   const res = await fetch(API);
+//   const data = await res.json();
+//   return {
+//     props: {
+//       data,
+//     },
+//   };
+// }
 
 interface Props {
   data: any;
 }
 
-const JobsList: React.FC<Props> = ({ data }) => {
-  // const { data } = useSWR<any[]>('/api/jobs', fetcher);
+// const JobsList: React.FC<Props> = ({ data }) => {
+//   // const { data } = useSWR<any[]>('/api/jobs', fetcher);
+//   // console.log('Is data ready?', !!data);
+//   console.log(data);
+
+//   return (
+//     <div className='w-[82%] flex flex-col items-start justify-start'>
+//       <List data={data} />
+//     </div>
+//   );
+// };
+
+function JobsList() {
+  const { data } = useSWR<any[]>(API);
   // console.log('Is data ready?', !!data);
   console.log(data);
 
@@ -56,25 +65,9 @@ const JobsList: React.FC<Props> = ({ data }) => {
       <List data={data} />
     </div>
   );
-};
-
-function Jobs({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  return (
-    <Layout>
-      <Head>
-        <title>devFinder</title>
-        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      </Head>
-
-      <div className='w-[82%] flex my-[5rem]'>
-        <Filters />
-        <JobsList data={data} />
-      </div>
-    </Layout>
-  );
 }
 
-// function Jobs({ fallback }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+// function Jobs({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) {
 //   return (
 //     <Layout>
 //       <Head>
@@ -84,12 +77,28 @@ function Jobs({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) 
 
 //       <div className='w-[82%] flex my-[5rem]'>
 //         <Filters />
-//         <SWRConfig value={{ fallback }}>
-//           <JobsList />
-//         </SWRConfig>
+//         <JobsList data={data} />
 //       </div>
 //     </Layout>
 //   );
 // }
+
+function Jobs({ fallback }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  return (
+    <Layout>
+      <Head>
+        <title>devFinder</title>
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      </Head>
+
+      <div className='w-[82%] flex my-[5rem]'>
+        <Filters />
+        <SWRConfig value={{ fallback }}>
+          <JobsList />
+        </SWRConfig>
+      </div>
+    </Layout>
+  );
+}
 
 export default Jobs;
