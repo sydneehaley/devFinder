@@ -56,7 +56,7 @@ interface Props {
 // };
 
 function JobsList() {
-  const { data } = useSWR<any[]>(API);
+  const { data } = useSWR<any[]>(API, fetcher);
   console.log('Is data ready?', !!data);
   console.log(data);
   console.log(API);
