@@ -8,7 +8,7 @@ import { InferGetServerSidePropsType } from 'next';
 import type { Fetcher, Key } from 'swr';
 
 const dev = process.env.NODE_ENV !== 'production';
-const server = dev ? 'http://localhost:3000' : 'https://dev-finder-sydneehaley.vercel.app/';
+const server = dev ? 'http://localhost:3000' : 'https://dev-finder-sydneehaley.vercel.app';
 let API = `${server}/api/jobs`;
 
 // if (global.window) {
