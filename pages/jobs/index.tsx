@@ -30,6 +30,8 @@ let API = `${server}/api/jobs`;
 //   };
 // }
 
+console.log(process.env.NODE_ENV !== 'production');
+
 export async function getServerSideProps() {
   const res = await fetch(API);
   const data = await res.json();
