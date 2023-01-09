@@ -1,3 +1,4 @@
+'use client';
 import type { NextPage } from 'next';
 import { CodeBracketIcon } from '@heroicons/react/24/outline';
 
@@ -9,7 +10,7 @@ const List: NextPage<Props> = ({ data }) => {
   return (
     <div className='w-full flex flex-col items-start justify-start'>
       <div className='mb-[3rem]'>
-        <h1 className='text-white text-[1.5rem]'>Recent Jobs</h1>
+        <h1 className='text-white text-[1.5rem]'>Jobs for you</h1>
       </div>
 
       <ul className='w-full p-0 m-0 grid grid-cols-3 grid-rows-3 gap-x-[3vh] gap-y-[3vh]'>

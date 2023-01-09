@@ -1,5 +1,6 @@
-import type { NextPage } from 'next';
-import { useEffect, useState, useRef } from 'react';
+'use client';
+
+import { useEffect, useState } from 'react';
 import { MapPinIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { CurrencyDollarIcon } from '@heroicons/react/24/outline';
@@ -7,9 +8,7 @@ import { ClockIcon } from '@heroicons/react/24/outline';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import axios from 'axios';
 
-// bg-gradient-to-b from-green-500/40 to-blue-500/40 flex items-center justify-center
-
-const Search: NextPage = () => {
+export default function Search() {
   const [cityData, setCityData] = useState<any>(null);
   const [city, setCity] = useState<any>(null);
 
@@ -90,6 +89,4 @@ const Search: NextPage = () => {
       </div>
     </div>
   );
-};
-
-export default Search;
+}
