@@ -2,8 +2,8 @@ import type { NextPage } from 'next';
 import 'server-only';
 import Head from 'next/head';
 import * as React from 'react';
-import Navbar from './components/dashboard/Navbar';
-import Search from './components/dashboard/Search';
+import Navbar from './dashboard/Navbar';
+import Search from './dashboard/Search';
 
 import '../dist/output.css';
 

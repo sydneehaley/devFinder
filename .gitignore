@@ -7,5 +7,5 @@ client/node_modules
 .env.production.local
 /.next
 /.vscode
-/app/components/dashboard/MapView.tsx
-/app/components/dashboard/Filters.tsx
+/app/dashboard/MapView.tsx
+/app/dashboard/Filters.tsx
