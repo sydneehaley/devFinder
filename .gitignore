@@ -8,4 +8,4 @@ client/node_modules
 /.next
 /.vscode
 /app/dashboard/MapView.tsx
-/app/dashboard/Filters.tsx
+/app/dashboard/Search.tsx

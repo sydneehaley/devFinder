@@ -1,3 +1,8 @@
+import Home from './Home';
 export default function Page() {
-  return <h1>devFinder landing page</h1>;
+  return (
+    <div className='w-full flex items-center justify-center'>
+      <Home />
+    </div>
+  );
 }

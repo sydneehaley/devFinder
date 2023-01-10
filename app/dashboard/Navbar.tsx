@@ -25,7 +25,7 @@ export default function Navbar() {
             <p className='text-[16px] ml-4'>devFinder</p>
           </div>
         </div>
-        <div className='w-[33.3%] h-full flex  justify-center '>
+        <div className='w-[33.3%] h-full flex justify-center '>
           <ul className='w-[65%] h-full flex  justify-between font-medium text-[1.14rem]'>
             <li className={'text-white font-semibold flex items-center text-white/20  flex items-center'}>Jobs</li>
             <li className={'font-semibold flex items-center text-white/20  flex items-center'}>Employers</li>
