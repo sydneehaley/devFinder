@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## devFinder
 
-A job board for software engineers. This fullstack web application uses Typescript, Node.js, Next.js, Prisma, Supabase (Postgres SQL), and Puppeteer. UI Design by Sydnee Haley.
+A job board for software engineers. Users can search jobs or create an account to view and save a personalized collection of jobs for free. This fullstack web application uses Typescript, Node.js, Next.js, Prisma, Supabase (Postgres SQL), and Puppeteer. UI Design by Sydnee Haley.
 
 **Demo**:
-[Vercel](http://dev-finder-sydneehaley.vercel.app)
+[Vercel](https://stately-sunburst-9c0616.netlify.app)

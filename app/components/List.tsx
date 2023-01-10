@@ -1,7 +1,6 @@
 'use client';
 
 export default function List({ data }: { data: any }) {
-  console.log(data);
   return (
     <div className='w-full flex flex-col items-start justify-start'>
       <div className='w-full mb-[3rem] flex items-center justify-start'>
