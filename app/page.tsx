@@ -1,24 +1,18 @@
-import List from './components/List';
-import Filters from './components/Filters';
+import List from '../components/List';
+import Filters from '../components/Filters';
 import prisma from '../lib/prisma/client/client';
-
-// async function getJobs() {
-//   const dev = process.env.NODE_ENV !== 'production';
-//   const res = await fetch('http://localhost:3000/api/jobs');
-//   if (!res.ok) {
-//     throw new Error('Failed to fetch data');
-//   }
-//   return res.json();
-// }
+import Navbar from '../components/Navbar';
+import '../dist/output.css';
 
 export default async function Home() {
-  const data = await prisma.jobs.findMany();
+  const jobs = await prisma.jobs.findMany();
 
   return (
-    <div className='w-full flex items-center justify-center'>
+    <div className='w-full bg-zinc-800 text-[#bbbbbb] flex flex-col items-center justify-center'>
+      <Navbar />
       <div className='w-[90%] flex  justify-center my-[5rem] antialiased'>
         <Filters />
-        <List data={data} />;
+        <List data={jobs} />
       </div>
     </div>
   );
