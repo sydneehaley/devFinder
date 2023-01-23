@@ -1,11 +1,10 @@
 import 'server-only';
-import Head from 'next/head';
 import * as React from 'react';
 import SupabaseListener from '../components/supabase-listener';
 import { createServerClient } from '../utils/supabase-server';
 import Navbar from '../components/Navbar';
 import type { SupabaseClient } from '@supabase/auth-helpers-nextjs';
-import type { Database } from '../lib/database.types';
+import type { Database } from '../types/database.types';
 import '../dist/output.css';
 import SupabaseProvider from '../components/supabase-provider';
 
@@ -14,7 +13,6 @@ export const revalidate = 0;
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const supabase = createServerClient();
-
   const {
     data: { session },
   } = await supabase.auth.getSession();
@@ -27,8 +25,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <SupabaseProvider session={session}>
           <SupabaseListener serverAccessToken={session?.access_token} />
-          <Navbar />
-          <div className='w-full flex items-center justify-center'>{children}</div>
+          {children}
         </SupabaseProvider>
       </body>
     </html>

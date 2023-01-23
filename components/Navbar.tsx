@@ -3,8 +3,15 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
+// import { signOut } from './supabase-auth-signout';
+import { useSupabase } from './supabase-provider';
 
 export default function Navbar() {
+  const signOut = async () => {
+    // const { supabase } = useSupabase();
+    // const { error } = await supabase.auth.signOut();
+    console.log('signout clicked');
+  };
   return (
     <div className='w-full h-[9vh] border-b border-neutral-700/40 flex justify-center items-center antialiased text-white'>
       <div className='w-[90%] flex justify-center items-center'>
@@ -35,9 +42,14 @@ export default function Navbar() {
             </form>
           </div>
           <div className='w-[33.3%] h-[7vh] flex items-center justify-end '>
-            <ul className='w-[40%] flex  text-white  justify-between font-medium text-[14px]'>
+            <ul className='w-[60%] flex  text-white  justify-between font-medium text-[14px]'>
               <li className='flex items-center flex items-center'>
-                <button className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>Sign Up</button>
+                <button onClick={signOut} className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>
+                  Sign In
+                </button>
+              </li>
+              <li className='flex items-center flex items-center'>
+                <button className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>Sign Out</button>
               </li>
               <li className='flex items-center flex items-center'>
                 <GlobeAltIcon className='h-7 w-7 text-white/20' />

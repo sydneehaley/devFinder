@@ -1,20 +1,14 @@
 'use client';
 import { useState } from 'react';
-import { createBrowserClient } from '../../utils/supabase-browser';
-import { useSupabase } from '../../components/supabase-provider';
+import { signInOtp } from '../../components/supabase-auth-signin-otp';
 
 export default function SignUp() {
-  const { supabase, session } = useSupabase();
   const [email, setEmail] = useState('');
 
   const createUser = async () => {
-    const { data, error } = await supabase.auth.signInWithOtp({
-      email: email,
-      options: {
-        emailRedirectTo: '/sign-in',
-      },
-    });
-    console.log({ data, error });
+    const signInUser = async () => {
+      signInOtp(email);
+    };
   };
 
   return (
@@ -54,7 +48,7 @@ export default function SignUp() {
         </button>
       </div>
       <form className='w-full flex flex-col' onSubmit={createUser}>
-        <button className='border border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white/20 font-medium text-[14px] p-[1rem]'>
+        <button className='border border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white font-medium text-[14px] p-[1rem]'>
           Continue with email
         </button>
         {/* <button className='bg-green-500 h-[5vh] rounded-lg text-white text-[14px]'>Create account</button> */}
