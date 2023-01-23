@@ -1,5 +1,9 @@
 'use client';
 
+import { generateKey } from 'crypto';
+import { useEffect } from 'react';
+import { generate } from '../components/Generate';
+
 export default function List({ data }: { data: any }) {
   return (
     <div className='w-full flex flex-col items-start justify-start'>

@@ -423,6 +423,10 @@ html,
   body {
   padding: 0px;
   margin: 0px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(39 39 42 / var(--tw-bg-opacity));
+  --tw-text-opacity: 1;
+  color: rgb(187 187 187 / var(--tw-text-opacity));
   font-size: 12px;
 }
 
@@ -555,6 +559,18 @@ html,
   margin-top: 1rem;
 }
 
+.mb-\[1rem\] {
+  margin-bottom: 1rem;
+}
+
+.ml-\[1rem\] {
+  margin-left: 1rem;
+}
+
+.box-content {
+  box-sizing: content-box;
+}
+
 .flex {
   display: flex;
 }
@@ -597,6 +613,18 @@ html,
 
 .h-\[4vh\] {
   height: 4vh;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-\[6vh\] {
+  height: 6vh;
+}
+
+.h-\[91vh\] {
+  height: 91vh;
 }
 
 .w-full {
@@ -661,6 +689,26 @@ html,
 
 .w-\[8rem\] {
   width: 8rem;
+}
+
+.w-\[60\%\] {
+  width: 60%;
+}
+
+.w-\[33\%\] {
+  width: 33%;
+}
+
+.w-\[30\%\] {
+  width: 30%;
+}
+
+.w-\[50\%\] {
+  width: 50%;
+}
+
+.transform {
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .grid-cols-3 {
@@ -761,11 +809,6 @@ html,
   border-color: rgb(64 64 64 / 0.7);
 }
 
-.bg-zinc-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(39 39 42 / var(--tw-bg-opacity));
-}
-
 .bg-transparent {
   background-color: transparent;
 }
@@ -827,6 +870,10 @@ html,
   font-size: 13px;
 }
 
+.text-\[1\.5rem\] {
+  font-size: 1.5rem;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -859,9 +906,20 @@ html,
   line-height: 1.6rem;
 }
 
-.text-\[\#bbbbbb\] {
-  --tw-text-opacity: 1;
-  color: rgb(187 187 187 / var(--tw-text-opacity));
+.leading-\[9rem\] {
+  line-height: 9rem;
+}
+
+.leading-\[3rem\] {
+  line-height: 3rem;
+}
+
+.leading-\[3\.5rem\] {
+  line-height: 3.5rem;
+}
+
+.leading-\[4rem\] {
+  line-height: 4rem;
 }
 
 .text-white {
@@ -915,12 +973,28 @@ a {
   }
 } */
 
+.placeholder\:ml-\[1rem\]::-moz-placeholder {
+  margin-left: 1rem;
+}
+
+.placeholder\:ml-\[1rem\]::placeholder {
+  margin-left: 1rem;
+}
+
 .placeholder\:text-\[14px\]::-moz-placeholder {
   font-size: 14px;
 }
 
 .placeholder\:text-\[14px\]::placeholder {
   font-size: 14px;
+}
+
+.placeholder\:text-\[15px\]::-moz-placeholder {
+  font-size: 15px;
+}
+
+.placeholder\:text-\[15px\]::placeholder {
+  font-size: 15px;
 }
 
 .placeholder\:font-semibold::-moz-placeholder {

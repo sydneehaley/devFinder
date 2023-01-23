@@ -18,16 +18,6 @@ const fetchData = async () => {
   await page.goto(url);
 
   const grabContent = await page.evaluate(() => {
-    // const getJobUrls = Array.from(document.querySelectorAll('a.css-jspxzf')).map((x, index) => ({ id: index, link: x.href }));
-    // const getJobUrls = document.querySelectorAll('a.css-jspxzf').map((x, index) => ({ id: index, link: x.href }));
-    // const getJobTitles = Array.from(document.querySelectorAll('h2.css-bdjp2m')).map((x, index) => ({ id: index, title: x.innerText }));
-    // const getJobCompanies = Array.from(document.querySelectorAll('span.companyName')).map((x, index) => ({ id: index, company: x.innerText }));
-    // const getJobLocations = Array.from(document.querySelectorAll('div.companyLocation')).map((x, index) => ({ id: index, location: x.innerText }));
-    // const getJobDescriptions = Array.from(document.querySelectorAll('.job-snippet > ul')).map((x, index) => ({
-    //   id: index,
-    //   description: x.innerText,
-    // }));
-
     const companies = document.querySelectorAll('span.companyName');
 
     const getJobCompanies = [];
@@ -149,19 +139,7 @@ const formatSendData = (res) => {
     return _.assign({ type: 'Full-time' }, _.find(mergeDescriptions, { index: item.index }));
   });
 
-  // const test_data = [
-  //   {
-  //     company: "Google",
-  //     description: "This is a new job at google",
-  //     link: "http://google.com",
-  //     type: "Fullstack",
-  //     title: "Software Engineer",
-  //   },
-  // ];
-
-  // console.log(jobs_data);
   console.log(jobs_data);
-  // dataToDatabase({ jobs_data });
 
   return jobs_data;
 };

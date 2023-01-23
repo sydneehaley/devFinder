@@ -27,7 +27,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body>
         <SupabaseProvider session={session}>
           <SupabaseListener serverAccessToken={session?.access_token} />
-
+          <Navbar />
           <div className='w-full flex items-center justify-center'>{children}</div>
         </SupabaseProvider>
       </body>

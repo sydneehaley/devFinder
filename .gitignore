@@ -9,3 +9,4 @@ client/node_modules
 /.vscode
 /app/dashboard/MapView.tsx
 /app/dashboard/Search.tsx
+/server
