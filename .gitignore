@@ -11,3 +11,5 @@ client/node_modules
 /app/dashboard/Search.tsx
 /server
 /lib
+/app/optional-session
+/app/realtime

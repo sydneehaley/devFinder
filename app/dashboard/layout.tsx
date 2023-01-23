@@ -7,7 +7,6 @@ export default function DashboardLayout({
 }) {
   return (
     <div className='antialiased'>
-      <Navbar />
       <div className='w-full flex items-center justify-center'>{children}</div>
     </div>
   );
