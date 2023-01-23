@@ -10,3 +10,4 @@ client/node_modules
 /app/dashboard/MapView.tsx
 /app/dashboard/Search.tsx
 /server
+/lib
