@@ -1,7 +1,7 @@
-import { useSupabase } from './supabase-provider';
+import { createBrowserClient } from '../utils/supabase-browser';
 
 export const signOut = async () => {
-  const { supabase } = useSupabase();
+  const supabase = createBrowserClient();
   const { error } = await supabase.auth.signOut();
   console.log({ error });
 };
