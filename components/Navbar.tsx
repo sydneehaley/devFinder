@@ -1,16 +1,30 @@
 'use client';
-
+import { Fragment, useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
+import { signUpCredential } from './supabase-auth-signup-credential';
 import { signOut } from './supabase-auth-signout';
+import { Transition, Dialog } from '@headlessui/react';
+import Logo from './Logo';
 
 export default function Navbar() {
-  // const signOut = async () => {
-  //   // const { supabase } = useSupabase();
-  //   // const { error } = await supabase.auth.signOut();
-  //   console.log('signout clicked');
-  // };
+  const [user, setUser] = useState({ email: '', password: '' });
+  const [isOpen, setIsOpen] = useState(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const handleOnChange = (e: any) => {
+    e.preventDefault;
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className='w-full h-[9vh] border-b border-neutral-700/40 flex justify-center items-center antialiased text-white'>
       <div className='w-[90%] flex justify-center items-center'>
@@ -43,7 +57,9 @@ export default function Navbar() {
           <div className='w-[33.3%] h-[7vh] flex items-center justify-end '>
             <ul className='w-[60%] flex  text-white  justify-between font-medium text-[14px]'>
               <li className='flex items-center flex items-center'>
-                <button className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>Sign In</button>
+                <button onClick={openModal} className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>
+                  Sign In
+                </button>
               </li>
               <li className='flex items-center flex items-center'>
                 <button onClick={signOut} className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>
@@ -60,6 +76,68 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      <>
+        <Transition appear show={isOpen} as={Fragment}>
+          <Dialog as='div' className='relative z-10' onClose={closeModal}>
+            <Transition.Child
+              as={Fragment}
+              enter='ease-out duration-300'
+              enterFrom='opacity-0'
+              enterTo='opacity-100'
+              leave='ease-in duration-200'
+              leaveFrom='opacity-100'
+              leaveTo='opacity-0'
+            >
+              <div className='fixed inset-0 bg-black bg-opacity-25' />
+            </Transition.Child>
+
+            <div className='fixed inset-0 overflow-y-auto'>
+              <div className='flex min-h-full items-center justify-center p-4 text-center'>
+                <Transition.Child
+                  as={Fragment}
+                  enter='ease-out duration-300'
+                  enterFrom='opacity-0 scale-95'
+                  enterTo='opacity-100 scale-100'
+                  leave='ease-in duration-200'
+                  leaveFrom='opacity-100 scale-100'
+                  leaveTo='opacity-0 scale-95'
+                >
+                  <Dialog.Panel className='w-full max-w-[50vw] h-full transform overflow-hidden rounded-2xl bg-zinc-800 p-[3rem] text-left align-middle flex items-center justify-center shadow-xl transition-all'>
+                    <div className='w-[70%] box-content flex flex-col items-center justify-center antialiased text-white mb-[5rem]'>
+                      {/* <div className='w-full flex flex-col items-center justify-center mb-[2rem]'>
+                        <h1 className='text-[2rem] leading-[4rem]'>
+                          <Logo />
+                        </h1>
+                      </div> */}
+                      <div className='w-full flex items-center justify-center'>
+                        <h1 className='text-[2rem] leading-[10rem]'>Log in</h1>
+                      </div>
+                      <form className='w-full flex flex-col'>
+                        <input
+                          onChange={handleOnChange}
+                          name='email'
+                          value={user.email}
+                          placeholder='Email address'
+                          className='border border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white placeholder:text-white/40 font-medium text-[14px] p-[1rem]'
+                        />
+                        <input
+                          onChange={handleOnChange}
+                          name='password'
+                          value={user.password}
+                          placeholder='Password'
+                          className='border border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white placeholder:text-white/40 font-medium text-[14px] p-[1rem]'
+                        />
+                        <button className='bg-green-500 h-[5vh] rounded-lg text-white text-[14px] font-medium'>Sign in</button>
+                      </form>
+                    </div>
+                  </Dialog.Panel>
+                </Transition.Child>
+              </div>
+            </div>
+          </Dialog>
+        </Transition>
+      </>
     </div>
   );
 }
