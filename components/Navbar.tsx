@@ -3,14 +3,17 @@ import { Fragment, useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
-import { signUpCredential } from './supabase-auth-signup-credential';
+import { CheckIcon } from '@heroicons/react/24/outline';
+// import { signUpCredential } from './supabase-auth-signup-credential';
 import { signOut } from './supabase-auth-signout';
 import { Transition, Dialog } from '@headlessui/react';
+import { RadioGroup } from '@headlessui/react';
 import Logo from './Logo';
 
 export default function Navbar() {
   const [user, setUser] = useState({ email: '', password: '' });
   const [isOpen, setIsOpen] = useState(false);
+  let [rememberUser, setRememberUser] = useState(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -55,17 +58,17 @@ export default function Navbar() {
             </form>
           </div>
           <div className='w-[33.3%] h-[7vh] flex items-center justify-end '>
-            <ul className='w-[60%] flex  text-white  justify-between font-medium text-[14px]'>
+            <ul className='w-[50%] flex  text-white  justify-between font-medium text-[14px]'>
               <li className='flex items-center flex items-center'>
                 <button onClick={openModal} className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>
                   Sign In
                 </button>
               </li>
-              <li className='flex items-center flex items-center'>
+              {/* <li className='flex items-center flex items-center'>
                 <button onClick={signOut} className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>
                   Sign Out
                 </button>
-              </li>
+              </li> */}
               <li className='flex items-center flex items-center'>
                 <GlobeAltIcon className='h-7 w-7 text-white/20' />
               </li>
@@ -103,7 +106,7 @@ export default function Navbar() {
                   leaveFrom='opacity-100 scale-100'
                   leaveTo='opacity-0 scale-95'
                 >
-                  <Dialog.Panel className='w-full max-w-[50vw] h-full transform overflow-hidden rounded-2xl bg-zinc-800 p-[3rem] text-left align-middle flex items-center justify-center shadow-xl transition-all'>
+                  <Dialog.Panel className='w-full max-w-[50vw] h-full transform overflow-hidden rounded-2xl bg-[#1D1D1F] border border-neutral-700/40 p-[3rem] text-left align-middle flex items-center justify-center shadow-xl transition-all'>
                     <div className='w-[70%] box-content flex flex-col items-center justify-center antialiased text-white mb-[5rem]'>
                       {/* <div className='w-full flex flex-col items-center justify-center mb-[2rem]'>
                         <h1 className='text-[2rem] leading-[4rem]'>
@@ -111,7 +114,7 @@ export default function Navbar() {
                         </h1>
                       </div> */}
                       <div className='w-full flex items-center justify-center'>
-                        <h1 className='text-[2rem] leading-[10rem]'>Log in</h1>
+                        <h1 className='text-[2rem] leading-[10rem]'>Jobs for you</h1>
                       </div>
                       <form className='w-full flex flex-col'>
                         <input
@@ -119,16 +122,33 @@ export default function Navbar() {
                           name='email'
                           value={user.email}
                           placeholder='Email address'
-                          className='border border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white placeholder:text-white/40 font-medium text-[14px] p-[1rem]'
+                          className='border-b border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white placeholder:text-white/40 font-medium text-[14px] py-[1rem] focus:outline-0'
                         />
                         <input
                           onChange={handleOnChange}
                           name='password'
                           value={user.password}
                           placeholder='Password'
-                          className='border border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white placeholder:text-white/40 font-medium text-[14px] p-[1rem]'
+                          className='border-b border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white placeholder:text-white/40 font-medium text-[14px] py-[1rem] focus:outline-0'
                         />
-                        <button className='bg-green-500 h-[5vh] rounded-lg text-white text-[14px] font-medium'>Sign in</button>
+
+                        <div className='w-full flex items-center justify-center my-[1rem]'>
+                          <div className='w-[70%]'>
+                            <div className='w-full flex'>
+                              <input type='checkbox' checked={rememberUser} className='checkbox' />
+                              <p className='ml-[0.5rem]'> Remember me</p>
+                            </div>
+                          </div>
+                          <div className='w-[30%]'>
+                            <p className='text-[1rem] font-medium underline'>Forgot Password?</p>
+                          </div>
+                        </div>
+                        <div className='w-full flex flex-col items-center justify-between mt-[2rem]'>
+                          <button className='w-full bg-green-500 h-[5vh] rounded-lg text-white text-[14px] font-medium mb-[1.2rem]'>Sign in</button>
+                          <button className='w-full border border-neutral-700/40 h-[5vh] rounded-lg text-white text-[14px] font-medium'>
+                            Create an account
+                          </button>
+                        </div>
                       </form>
                     </div>
                   </Dialog.Panel>
