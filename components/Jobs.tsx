@@ -5,5 +5,5 @@ export default async function Jobs() {
   const supabase = createServerClient();
   const { data, error } = await supabase?.from('test').select('*');
 
-  return <List data={data} error={error} />;
+  return <List data={data} />;
 }
