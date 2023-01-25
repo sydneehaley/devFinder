@@ -3,17 +3,17 @@ import { Fragment, useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
 import { GlobeAltIcon } from '@heroicons/react/24/outline';
-import { CheckIcon } from '@heroicons/react/24/outline';
-// import { signUpCredential } from './supabase-auth-signup-credential';
 import { signOut } from './supabase-auth-signout';
 import { Transition, Dialog } from '@headlessui/react';
-import { RadioGroup } from '@headlessui/react';
 import Logo from './Logo';
+import { useSupabase } from './supabase-provider';
 
 export default function Navbar() {
   const [user, setUser] = useState({ email: '', password: '' });
+  const { email, password } = user;
   const [isOpen, setIsOpen] = useState(false);
   let [rememberUser, setRememberUser] = useState(false);
+  const { supabase } = useSupabase();
 
   function closeModal() {
     setIsOpen(false);
@@ -28,8 +28,34 @@ export default function Navbar() {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const signInCredential = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+    console.log({ data, error });
+  };
+
+  const signUpCredential = async (email: string, password: string) => {
+    const { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+    console.log({ data, error });
+  };
+
+  const signIn = (e: any) => {
+    e.preventDefault();
+    signInCredential(email, password);
+  };
+
+  const signUp = (e: any) => {
+    e.preventDefault();
+    signUpCredential(email, password);
+  };
+
   return (
-    <div className='w-full h-[9vh] border-b border-neutral-700/40 flex justify-center items-center antialiased text-white'>
+    <div className='w-full h-[9vh] bg-neutral flex justify-center items-center antialiased text-white'>
       <div className='w-[90%] flex justify-center items-center'>
         <div className='w-full flex'>
           <div className='font-sans font-bold w-[33.33%]'>
@@ -50,7 +76,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className='w-[33.3%] flex items-center justify-center'>
-            <form className='w-full border border-neutral-700/40 bg-transparent h-[5vh] rounded-lg flex items-center justify-center'>
+            <form className='w-full border border-neutral-content/30 bg-transparent h-[5vh] rounded-lg flex items-center justify-center'>
               <button className='rounded-full  h-[4vh] w-[4vh] flex items-center justify-center'>
                 <MagnifyingGlassIcon className='h-6 w-6 text-white' />
               </button>
@@ -60,12 +86,12 @@ export default function Navbar() {
           <div className='w-[33.3%] h-[7vh] flex items-center justify-end '>
             <ul className='w-[50%] flex  text-white  justify-between font-medium text-[14px]'>
               <li className='flex items-center flex items-center'>
-                <button onClick={openModal} className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>
+                <button onClick={openModal} className='border border-neutral-content/30 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>
                   Sign In
                 </button>
               </li>
               {/* <li className='flex items-center flex items-center'>
-                <button onClick={signOut} className='border border-neutral-700/40 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>
+                <button onClick={signOut} className='border border-neutral-content/30 rounded-lg h-[5vh] w-[8rem] flex items-center justify-center'>
                   Sign Out
                 </button>
               </li> */}
@@ -92,7 +118,7 @@ export default function Navbar() {
               leaveFrom='opacity-100'
               leaveTo='opacity-0'
             >
-              <div className='fixed inset-0 bg-black bg-opacity-25' />
+              <div className='fixed inset-0 bg-black bg-opacity-80' />
             </Transition.Child>
 
             <div className='fixed inset-0 overflow-y-auto'>
@@ -106,7 +132,7 @@ export default function Navbar() {
                   leaveFrom='opacity-100 scale-100'
                   leaveTo='opacity-0 scale-95'
                 >
-                  <Dialog.Panel className='w-full max-w-[50vw] h-full transform overflow-hidden rounded-2xl bg-[#1D1D1F] border border-neutral-700/40 p-[3rem] text-left align-middle flex items-center justify-center shadow-xl transition-all'>
+                  <Dialog.Panel className='w-full max-w-[50vw] h-full transform overflow-hidden rounded-2xl bg-neutral-focus  p-[3rem] text-left align-middle flex items-center justify-center shadow-xl transition-all'>
                     <div className='w-[70%] box-content flex flex-col items-center justify-center antialiased text-white mb-[5rem]'>
                       {/* <div className='w-full flex flex-col items-center justify-center mb-[2rem]'>
                         <h1 className='text-[2rem] leading-[4rem]'>
@@ -122,30 +148,41 @@ export default function Navbar() {
                           name='email'
                           value={user.email}
                           placeholder='Email address'
-                          className='border-b border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white placeholder:text-white/40 font-medium text-[14px] py-[1rem] focus:outline-0'
+                          className='border-b border-neutral-content/30 bg-transparent h-[6vh]  mb-[2rem] text-white placeholder:text-white/40 placeholder:font-regular placeholder:text-[14px] font-medium text-[16px] py-[1rem] focus:outline-0'
                         />
                         <input
                           onChange={handleOnChange}
                           name='password'
                           value={user.password}
                           placeholder='Password'
-                          className='border-b border-neutral-700/40 bg-transparent h-[6vh] rounded-lg mb-[2rem] text-white placeholder:text-white/40 font-medium text-[14px] py-[1rem] focus:outline-0'
+                          className='border-b border-neutral-content/30 bg-transparent h-[6vh] mb-[2rem] text-white placeholder:text-white/40 placeholder:font-regular font-medium text-[14px] py-[1rem] focus:outline-0'
                         />
 
                         <div className='w-full flex items-center justify-center my-[1rem]'>
-                          <div className='w-[70%]'>
+                          <div className='w-[50%]'>
                             <div className='w-full flex'>
-                              <input type='checkbox' checked={rememberUser} className='checkbox' />
-                              <p className='ml-[0.5rem]'> Remember me</p>
+                              <input
+                                type='checkbox'
+                                onClick={() => setRememberUser(!rememberUser)}
+                                checked={rememberUser}
+                                className='checkbox checkbox-secondary rounded-sm'
+                              />
+                              <p className='ml-[0.5rem] text-[14px]'> Remember me</p>
                             </div>
                           </div>
-                          <div className='w-[30%]'>
-                            <p className='text-[1rem] font-medium underline'>Forgot Password?</p>
+                          <div className='w-[50%] flex items-center justify-end'>
+                            <p className='text-[14px] font-regular underline'>Forgot Password?</p>
                           </div>
                         </div>
                         <div className='w-full flex flex-col items-center justify-between mt-[2rem]'>
-                          <button className='w-full bg-green-500 h-[5vh] rounded-lg text-white text-[14px] font-medium mb-[1.2rem]'>Sign in</button>
-                          <button className='w-full border border-neutral-700/40 h-[5vh] rounded-lg text-white text-[14px] font-medium'>
+                          <button onClick={signIn} className='w-full bg-green-500 h-[5vh] rounded-lg text-white text-[14px] font-medium mb-[1.2rem]'>
+                            Sign in
+                          </button>
+
+                          <button
+                            onClick={signUp}
+                            className='w-full border border-neutral-content/30 h-[5vh] rounded-lg text-white text-[14px] font-medium'
+                          >
                             Create an account
                           </button>
                         </div>

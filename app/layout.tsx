@@ -18,7 +18,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   } = await supabase.auth.getSession();
 
   return (
-    <html lang='en'>
+    <html className='bg-neutral' lang='en'>
       <head>
         <title>Jobs Near You | devFinder</title>
       </head>

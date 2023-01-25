@@ -9,7 +9,7 @@ export default function List({ data, error }: { data: any; error: any }) {
 
       <ul className='w-full p-0 m-0 grid grid-cols-3 grid-rows-3 gap-x-[3vh] gap-y-[3vh] child:shadow-sm '>
         {data?.map((job: any, i: any) => (
-          <li className=' border border-neutral-700/70 h-full rounded-xl p-[2rem]' key={job?.job_id}>
+          <li className=' border border-neutral-content/30 h-full rounded-xl p-[2rem]' key={job?.job_id}>
             <div className='leading-[2rem] h-[80%]'>
               <h6 className='text-[14px] font-semibold text-amber-200'>{job.title}</h6>
               <h6 className='text-[12px] text-white/30'>{job.company}</h6>

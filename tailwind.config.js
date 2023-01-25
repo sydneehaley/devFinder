@@ -25,6 +25,10 @@ module.exports = {
       addVariant('child', '& > *');
       addVariant('child-hover', '& > *:hover');
     },
+    require('daisyui'),
   ],
   // plugins: [require('daisyui')],
+  daisyui: {
+    themes: ['forest'],
+  },
 };
