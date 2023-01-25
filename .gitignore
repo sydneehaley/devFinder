@@ -13,3 +13,4 @@ client/node_modules
 /lib
 /app/optional-session
 /app/realtime
+/pages/api/jobs
