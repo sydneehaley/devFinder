@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const {
     data: { session },
   } = await supabase.auth.getSession();
-
+  console.log(session?.user);
   return (
     <html className='bg-neutral' lang='en'>
       <head>

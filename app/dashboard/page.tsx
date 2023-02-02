@@ -11,7 +11,7 @@ export default async function Dashboard() {
   const { data } = await supabase.from('test').select('*');
 
   return (
-    <div className='w-[82%] flex flex-col items-center justify-center my-[5rem] antialiased'>
+    <div className='w-[80%] flex flex-col items-center justify-center my-[5rem] antialiased'>
       <Jobs serverPosts={data || []} />
     </div>
   );
