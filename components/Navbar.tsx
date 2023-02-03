@@ -75,7 +75,7 @@ export default function Navbar(session: any) {
   };
 
   return (
-    <div className='w-full h-[9vh] bg-neutral border-b border-neutral-content/10 flex justify-center items-center antialiased text-white'>
+    <div className='w-full h-[9vh]  border-b border-neutral-content/10 flex justify-center items-center antialiased text-white'>
       <div className='w-[80%] flex justify-center items-center'>
         <div className='w-full flex'>
           <div className='font-sans font-bold w-[50%]'>
@@ -117,27 +117,15 @@ export default function Navbar(session: any) {
               </form>
             </div>
           </div>
-          {/* <div className='w-[33.3%] flex items-center justify-center'>
-            <form className='w-full border border-neutral-content/30 bg-neutral-focus h-[5vh] rounded-lg flex items-center justify-center'>
-              <button className='rounded-full  h-[4vh] w-[4vh] flex items-center justify-center'>
-                <MagnifyingGlassIcon className='h-6 w-6 text-white' />
-              </button>
-              <input placeholder='Search...' className='w-[90%] placeholder:text-[14px] placeholder:text-white/40' />
-            </form>
-          </div> */}
+
           <div className='w-[50%] h-[9vh] flex items-center justify-end text-neutral-content/20'>
-            <ul className='w-[55%] flex items-center justify-between font-medium text-[14px]'>
-              {/* <li className='flex items-center flex items-center text-neutral-content/50'>
-                <ChatBubbleBottomCenterTextIcon className='h-7 w-7 mr-[0.5rem]' />
+            <ul className='w-[35%] flex items-center justify-between font-medium text-[14px]'>
+              <li className='flex  h-[9vh] items-center flex items-center justify-center '>
+                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 fill-neutral-content/50' viewBox='0 0 36 36'>
+                  <path d='M6 12h6V6H6v6zm9 18h6v-6h-6v6zm-9 0h6v-6H6v6zm0-9h6v-6H6v6zm9 0h6v-6h-6v6zm9-15v6h6V6h-6zm-9 6h6V6h-6v6zm9 9h6v-6h-6v6zm0 9h6v-6h-6v6z' />
+                </svg>
               </li>
-              <li className='flex items-center flex items-center text-neutral-content/50'>
-                <BellIcon className='h-7 w-7 mr-[0.5rem]' />
-              </li> */}
-              <li className='flex flex w-[20vw] h-[9vh] flex items-center justify-center text-neutral-content/50  h-[5vh]'>
-                <GlobeAltIcon className='h-7 w-7 mr-[1rem]' />
-                {city === null ? 'Finding you...' : city}
-              </li>
-              <li className='flex w-[10vw] h-[9vh] items-center flex items-center justify-center border-l border-neutral-content/10'>
+              <li className='flex  h-[9vh] items-center flex  justify-center'>
                 <Menu>
                   <Menu.Button>
                     <UserCircleIcon className='h-7 w-7 mr-[0.3rem] text-neutral-content/50' />
@@ -208,10 +196,9 @@ export default function Navbar(session: any) {
                   </Menu.Items>
                 </Menu>
               </li>
-              <li className='flex w-[10vw] h-[9vh] items-center flex items-center justify-center border-r border-neutral-content/10 border-l border-neutral-content/10'>
-                <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 fill-neutral-content/50' viewBox='0 0 36 36'>
-                  <path d='M6 12h6V6H6v6zm9 18h6v-6h-6v6zm-9 0h6v-6H6v6zm0-9h6v-6H6v6zm9 0h6v-6h-6v6zm9-15v6h6V6h-6zm-9 6h6V6h-6v6zm9 9h6v-6h-6v6zm0 9h6v-6h-6v6z' />
-                </svg>
+              <li className='flex border-l border-neutral-content/10 flex  h-[9vh] flex items-center justify-center text-neutral-content/50 pl-[1.5rem] h-[5vh]'>
+                <GlobeAltIcon className='h-7 w-7 mr-[1rem]' />
+                {city === null ? 'Finding you...' : city}
               </li>
             </ul>
           </div>
