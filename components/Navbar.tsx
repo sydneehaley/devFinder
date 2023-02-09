@@ -1,23 +1,15 @@
 'use client';
 
-import { Fragment, useEffect, useState } from 'react';
-import { ChevronDownIcon, MagnifyingGlassIcon, MapPinIcon, Bars3Icon, Squares2X2Icon } from '@heroicons/react/24/outline';
-import { signOut } from './supabase-auth-signout';
-import { Transition, Dialog } from '@headlessui/react';
-import Logo from './Logo';
-import { useSupabase } from './supabase-provider';
+import { useEffect, useState } from 'react';
+import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { location } from '../app/location';
-import { Menu } from '@headlessui/react';
-import { GlobeAltIcon, BriefcaseIcon, ChatBubbleBottomCenterTextIcon, BellIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { GlobeAltIcon } from '@heroicons/react/24/solid';
+import DropdownMenu from './DropdownMenu';
+import Signin from './Signin';
 
 export default function Navbar(session: any) {
-  const [user, setUser] = useState({ email: '', password: '' });
   const [cityData, setCityData] = useState<any>(null);
   const [city, setCity] = useState<any>(null);
-  const { email, password } = user;
-  const [isOpen, setIsOpen] = useState(false);
-  let [rememberUser, setRememberUser] = useState(false);
-  const { supabase } = useSupabase();
 
   useEffect(() => {
     if ('geolocation' in navigator) {
@@ -33,46 +25,7 @@ export default function Navbar(session: any) {
         });
       });
     }
-  }, [city]);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  const handleOnChange = (e: any) => {
-    e.preventDefault;
-    setUser({ ...user, [e.target.name]: e.target.value });
-  };
-
-  const signInCredential = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    console.log({ data, error });
-  };
-
-  const signUpCredential = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
-    console.log({ data, error });
-  };
-
-  const signIn = (e: any) => {
-    e.preventDefault();
-    signInCredential(email, password);
-  };
-
-  const signUp = (e: any) => {
-    e.preventDefault();
-    signUpCredential(email, password);
-  };
+  }, []);
 
   return (
     <div className='w-full h-[9vh]  border-b border-neutral-content/10 flex justify-center items-center antialiased text-white'>
@@ -126,77 +79,9 @@ export default function Navbar(session: any) {
                 </svg>
               </li>
               <li className='flex  h-[9vh] items-center flex  justify-center'>
-                <Menu>
-                  <Menu.Button>
-                    <UserCircleIcon className='h-7 w-7 mr-[0.3rem] text-neutral-content/50' />
-                  </Menu.Button>
-                  <Menu.Items className='w-[13vw] absolute left-[83vw] border border-neutral-content/30 bg-neutral-focus flex flex-col rounded-md top-[10vh] text-neutral-content'>
-                    <div className='py-[0.5rem]'>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <div className={`w-full flex items-center justify-center h-[5vh] ${active && 'hover:bg-neutral-content/10'}`}>
-                            <a onClick={openModal} className='w-[85%] text-[14px] flex' href='/'>
-                              Sign Up
-                            </a>
-                          </div>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <div className={`w-full flex items-center justify-center h-[5vh]  ${active && 'hover:bg-neutral-content/10'}`}>
-                            <a onClick={openModal} className='w-[85%] flex font-regular' href='/'>
-                              Log in
-                            </a>
-                          </div>
-                        )}
-                      </Menu.Item>
-                    </div>{' '}
-                    <div className='py-[0.5rem] border-t border-neutral-content/10 '>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <div className={`w-full flex items-center justify-center h-[5vh] ${active && 'hover:bg-neutral-content/10'}`}>
-                            <a className='w-[85%] flex font-regular' href='/'>
-                              Employers
-                            </a>
-                          </div>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <div className={`w-full flex items-center justify-center h-[5vh]  ${active && 'hover:bg-neutral-content/10'}`}>
-                            <a className='w-[85%] flex font-regular' href='/'>
-                              Post A Job
-                            </a>
-                          </div>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <div className={`w-full flex items-center justify-center h-[5vh] ${active && 'hover:bg-neutral-content/10'}`}>
-                            <a className='w-[85%] flex font-regular' href='/'>
-                              Help
-                            </a>
-                          </div>
-                        )}
-                      </Menu.Item>
-                    </div>
-                    {session && (
-                      <div className='py-[0.5rem] border-t border-neutral-content/10 '>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <div className={`w-full flex items-center justify-center h-[5vh] ${active && 'hover:bg-neutral-content/10'}`}>
-                              <a onClick={signOut} className='w-[85%] flex font-regular' href='/'>
-                                Sign out
-                              </a>
-                            </div>
-                          )}
-                        </Menu.Item>
-                      </div>
-                    )}
-                  </Menu.Items>
-                </Menu>
+                <DropdownMenu session={session} />
               </li>
-              <li className='flex border-l border-neutral-content/10 flex  h-[9vh] flex items-center justify-center text-neutral-content/50 pl-[1.5rem] h-[5vh]'>
+              <li className='flex border-l border-neutral-content/10 flex  h-[7vh] flex items-center justify-center text-neutral-content/50 pl-[1.5rem] h-[5vh]'>
                 <GlobeAltIcon className='h-7 w-7 mr-[1rem]' />
                 {city === null ? 'Finding you...' : city}
               </li>
@@ -204,96 +89,6 @@ export default function Navbar(session: any) {
           </div>
         </div>
       </div>
-
-      <>
-        <Transition appear show={isOpen} as={Fragment}>
-          <Dialog as='div' className='relative z-10' onClose={closeModal}>
-            <Transition.Child
-              as={Fragment}
-              enter='ease-out duration-300'
-              enterFrom='opacity-0'
-              enterTo='opacity-100'
-              leave='ease-in duration-200'
-              leaveFrom='opacity-100'
-              leaveTo='opacity-0'
-            >
-              <div className='fixed inset-0 bg-black bg-opacity-80' />
-            </Transition.Child>
-
-            <div className='fixed inset-0 overflow-y-auto'>
-              <div className='flex min-h-full items-center justify-center p-4 text-center'>
-                <Transition.Child
-                  as={Fragment}
-                  enter='ease-out duration-300'
-                  enterFrom='opacity-0 scale-95'
-                  enterTo='opacity-100 scale-100'
-                  leave='ease-in duration-200'
-                  leaveFrom='opacity-100 scale-100'
-                  leaveTo='opacity-0 scale-95'
-                >
-                  <Dialog.Panel className='w-full max-w-[50vw] h-full transform overflow-hidden rounded-2xl bg-neutral-focus  p-[3rem] text-left align-middle flex items-center justify-center shadow-xl transition-all'>
-                    <div className='w-[70%] box-content flex flex-col items-center justify-center antialiased text-white mb-[5rem]'>
-                      {/* <div className='w-full flex flex-col items-center justify-center mb-[2rem]'>
-                        <h1 className='text-[2rem] leading-[4rem]'>
-                          <Logo />
-                        </h1>
-                      </div> */}
-                      <div className='w-full flex items-center justify-center'>
-                        <h1 className='text-[2rem] leading-[10rem]'>Jobs for you</h1>
-                      </div>
-                      <form className='w-full flex flex-col'>
-                        <input
-                          onChange={handleOnChange}
-                          name='email'
-                          value={user.email}
-                          placeholder='Email address'
-                          className='border-b border-neutral-content/30 bg-transparent h-[6vh]  mb-[2rem] text-white placeholder:text-white/40 placeholder:font-regular placeholder:text-[14px] font-medium text-[16px] py-[1rem] focus:outline-0'
-                        />
-                        <input
-                          onChange={handleOnChange}
-                          name='password'
-                          value={user.password}
-                          placeholder='Password'
-                          className='border-b border-neutral-content/30 bg-transparent h-[6vh] mb-[2rem] text-white placeholder:text-white/40 placeholder:font-regular font-medium text-[14px] py-[1rem] focus:outline-0'
-                        />
-
-                        <div className='w-full flex items-center justify-center my-[1rem]'>
-                          <div className='w-[50%]'>
-                            <div className='w-full flex'>
-                              <input
-                                type='checkbox'
-                                onClick={() => setRememberUser(!rememberUser)}
-                                checked={rememberUser}
-                                className='checkbox checkbox-secondary rounded-sm'
-                              />
-                              <p className='ml-[0.5rem] text-[14px]'> Remember me</p>
-                            </div>
-                          </div>
-                          <div className='w-[50%] flex items-center justify-end'>
-                            <p className='text-[14px] font-regular underline'>Forgot Password?</p>
-                          </div>
-                        </div>
-                        <div className='w-full flex flex-col items-center justify-between mt-[2rem]'>
-                          <button onClick={signIn} className='w-full bg-green-500 h-[5vh] rounded-lg text-white text-[14px] font-medium mb-[1.2rem]'>
-                            Sign in
-                          </button>
-
-                          <button
-                            onClick={signUp}
-                            className='w-full border border-neutral-content/30 h-[5vh] rounded-lg text-white text-[14px] font-medium'
-                          >
-                            Create an account
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </Dialog.Panel>
-                </Transition.Child>
-              </div>
-            </div>
-          </Dialog>
-        </Transition>
-      </>
     </div>
   );
 }
