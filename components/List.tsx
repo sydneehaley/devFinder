@@ -7,8 +7,9 @@ export default function List({ data }: { data: any }) {
   const [currentJob, setCurrentJob] = useState<any>();
 
   useEffect(() => {
-    setCurrentJob(data?.find((job: any, i: number) => i === index));
-  }, [index]);
+    console.log(data);
+    setCurrentJob(data?.data.find((job: any, i: number) => i === index));
+  }, [index, data]);
 
   return (
     <div className='w-full flex flex-col items-start justify-start'>
@@ -18,16 +19,16 @@ export default function List({ data }: { data: any }) {
 
       <div className='w-full grid grid-cols-2 rounded-xl border border-neutral-content/10'>
         <ul className='grid col-span-1 divide-y-[1px] divide-neutral-content/10 p-0 m-0 child:shadow-sm rounded-l-xl '>
-          {data?.map((job: any, i: any) => (
+          {data?.data.map((job: any, i: any) => (
             <li
               className={`w-full h-[19vh] py-[1.5rem] px-[2rem] cursor-pointer ${i === index ? 'bg-neutral-content/10' : null} ${
                 i === 0 ? 'rounded-tl-xl' : null
               }`}
-              key={job?.job_id}
+              key={job?.id}
               onClick={() => setIndex(i)}
             >
               <div className='leading-[1.75rem] h-[80%]'>
-                <h6 className='text-[16px] font-semibold text-neutral-content leading-[3rem]'>{job.title}</h6>
+                <h6 className='text-[16px] font-semibold text-neutral-content leading-[3rem]'>{job.attributes.title}</h6>
                 <h6 className='text-[14px] text-white/30 '>Company</h6>
                 <h6 className='text-[14px] text-white/30'>Los Angeles, CA</h6>
                 <h6 className='text-[13px] text-green-500 font-medium leading-[4rem] text-primary-focus'>5 Hours Ago</h6>
@@ -38,7 +39,7 @@ export default function List({ data }: { data: any }) {
 
         <div className='grid col-span-1 border-l border-neutral-content/10 p-[3rem]'>
           <div>
-            <h1 className='text-[30px] font-regular text-neutral-content leading-[5rem]'>{currentJob?.title}</h1>
+            <h1 className='text-[30px] font-regular text-neutral-content leading-[5rem]'>{currentJob?.attributes.title}</h1>
             <h6 className='text-[14px] font-regular text-neutral-content leading-[2rem]'>Company</h6>
             <h6 className='text-[14px] font-regular text-neutral-content leading-[2rem]'>Los Angeles, CA</h6>
             <br />

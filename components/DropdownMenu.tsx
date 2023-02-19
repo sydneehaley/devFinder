@@ -22,7 +22,7 @@ export default function DropdownMenu(session: any) {
         <Menu.Button>
           <UserCircleIcon className='h-7 w-7 mr-[0.3rem] text-neutral-content/50' />
         </Menu.Button>
-        <Menu.Items className='w-[13vw] absolute left-[83vw] border border-neutral-content/30 bg-neutral-focus flex flex-col rounded-md top-[10vh] text-neutral-content'>
+        <Menu.Items className='w-[13vw] absolute left-[79vw] border border-neutral-content/30 bg-neutral-focus flex flex-col rounded-md top-[10vh] text-neutral-content'>
           <div className='py-[0.5rem]'>
             <Menu.Item>
               {({ active }) => (

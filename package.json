@@ -13,6 +13,7 @@
     "schema": "lib/prisma/schema.prisma"
   },
   "dependencies": {
+    "@bn-digital/strapi-plugin-field-uuid": "^1.1.7",
     "@googlemaps/js-api-loader": "^1.15.1",
     "@googlemaps/react-wrapper": "^1.1.35",
     "@headlessui/react": "^1.7.7",

@@ -55,7 +55,7 @@ export default function Navbar(session: any) {
                   </button>
                   <input
                     placeholder='Search by title, salary, skill...'
-                    className='placeholder:text-[13px] placeholder:text-white/40  bg-transparent outline-0 pl-[0.2rem]'
+                    className='placeholder:text-[13px] placeholder:text-white/40 w-full  bg-transparent outline-0 pl-[0.2rem]'
                   />
                 </div>
                 <div className='w-[48%] flex items-center bg-neutral-focus/30 w-full border font-regular border-neutral-content/10 h-[5vh] rounded-full shadow-md'>
@@ -64,7 +64,7 @@ export default function Navbar(session: any) {
                   </button>
                   <input
                     placeholder='City, state, or zip code'
-                    className='placeholder:text-[13px] placeholder:text-white/40  bg-transparent outline-0 pl-[0.2rem]'
+                    className='placeholder:text-[13px] placeholder:text-white/40 w-full bg-transparent outline-0 pl-[0.2rem]'
                   />
                 </div>
               </form>
