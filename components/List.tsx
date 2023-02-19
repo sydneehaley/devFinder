@@ -7,8 +7,8 @@ export default function List({ data }: { data: any }) {
   const [currentJob, setCurrentJob] = useState<any>();
 
   useEffect(() => {
-    console.log(data);
-    setCurrentJob(data?.data.find((job: any, i: number) => i === index));
+    // console.log(data);
+    // setCurrentJob(data?.data.find((job: any, i: number) => i === index));
   }, [index, data]);
 
   return (
@@ -17,7 +17,7 @@ export default function List({ data }: { data: any }) {
         <h6 className='text-[20px] font-medium text-white'>Jobs near you</h6>
       </div>
 
-      <div className='w-full grid grid-cols-2 rounded-xl border border-neutral-content/10'>
+      {/* <div className='w-full grid grid-cols-2 rounded-xl border border-neutral-content/10'>
         <ul className='grid col-span-1 divide-y-[1px] divide-neutral-content/10 p-0 m-0 child:shadow-sm rounded-l-xl '>
           {data?.data.map((job: any, i: any) => (
             <li
@@ -65,7 +65,7 @@ export default function List({ data }: { data: any }) {
             </ul>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

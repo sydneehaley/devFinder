@@ -11,7 +11,7 @@ const getData = async (path: string) => {
   const res = await fetch(API_URL);
 
   if (!res.ok) {
-    throw new Error();
+    throw new Error('Error occured');
   }
 
   return res.json();
