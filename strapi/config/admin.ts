@@ -5,4 +5,5 @@ export default ({ env }: { env: any }) => ({
   apiToken: {
     salt: env("API_TOKEN_SALT"),
   },
+  url: "/employers",
 });
