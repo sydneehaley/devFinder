@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline';
-import { location } from '../app/location';
+import { location } from '../components/Location';
 import { GlobeAltIcon } from '@heroicons/react/24/solid';
 import DropdownMenu from './DropdownMenu';
 import Signin from './Signin';
@@ -15,11 +15,7 @@ export default function Navbar(session: any) {
     if ('geolocation' in navigator) {
       console.log('Available');
       navigator.geolocation.getCurrentPosition(function (position) {
-        console.log('Latitude is :', position.coords.latitude);
-        console.log('Longitude is :', position.coords.longitude);
-
         location(position.coords.latitude, position.coords.longitude).then((res) => {
-          console.log(res.features[0].properties);
           setCityData(res.features[0].properties);
           setCity(res.features[0].properties.city);
         });
