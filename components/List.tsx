@@ -1,16 +1,30 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { marked } from 'marked';
+import * as DOMPurify from 'dompurify';
+import parse from 'html-react-parser';
 
 export default function List(data: any) {
   const [index, setIndex] = useState(0);
   const [jobs, setJobs] = useState<Object[]>();
   const [currentJob, setCurrentJob] = useState<any>();
 
+  const getMarkdownText = (text: any) => {
+    const clss = ' class="list-disc p-[1rem]"';
+    const parsed = DOMPurify.sanitize(marked.parse(text));
+    const formattedText = parsed.slice(0, 3) + clss + parsed.slice(3, parsed.length);
+
+    console.log(marked.parse(text));
+    return { __html: formattedText };
+  };
+
   useEffect(() => {
     setJobs(data?.data?.data);
     setCurrentJob(data?.data?.data?.find((job: any, i: number) => i === index));
   }, [index, data]);
+
+  console.log(currentJob?.attributes.qualifications);
 
   return (
     <div className='w-full flex flex-col items-start justify-start'>
@@ -19,7 +33,7 @@ export default function List(data: any) {
       </div>
 
       <div className='w-full grid grid-cols-2 rounded-xl border border-neutral-content/10'>
-        <ul className='grid col-span-1 divide-y-[1px] divide-neutral-content/10 p-0 m-0 child:shadow-sm rounded-l-xl '>
+        <ul className='grid col-span-1 list-none divide-y-[1px] divide-neutral-content/10 p-0 m-0 child:shadow-sm rounded-l-xl '>
           {jobs?.map((job: any, i: any) => (
             <li
               className={`w-full h-[19vh] py-[1.5rem] px-[2rem] cursor-pointer ${i === index ? 'bg-neutral-content/10' : null} ${
@@ -50,17 +64,20 @@ export default function List(data: any) {
             <br />
             <label className='text-[14px] font-semibold leading-[3rem] text-neutral-content'>Job Description</label>
             <p className='text-[14px]'>{currentJob?.attributes.description}</p>
-
             <br />
             <br />
             <br />
-            <label className='text-[14px] font-semibold leading-[3rem] text-neutral-content'>Requirements</label>
-            <ul className='list-disc pl-[1rem]'>
-              <li> Lorem ipsum dolor sit amet</li>
-              <li> Lorem ipsum dolor sit amet</li>
-              <li> Lorem ipsum dolor sit amet</li>
-              <li> Lorem ipsum dolor sit amet</li>
-            </ul>
+            <label className='text-[14px] font-semibold leading-[3rem] text-neutral-content'>Qualifications</label>
+            <div
+              className='text-[14px] list-disc'
+              dangerouslySetInnerHTML={getMarkdownText(data?.data?.data?.find((job: any, i: number) => i === index).attributes.qualifications)}
+            ></div>
+            <br /> <br />
+            <label className='text-[14px] font-semibold leading-[3rem] text-neutral-content'>Job Duties</label>
+            <div
+              className='text-[14px]'
+              dangerouslySetInnerHTML={getMarkdownText(data?.data?.data?.find((job: any, i: number) => i === index).attributes.job_duties)}
+            ></div>
           </div>
         </div>
       </div>
