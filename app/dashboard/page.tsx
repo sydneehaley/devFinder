@@ -2,6 +2,7 @@ import 'server-only';
 import { createServerClient } from '../../utils/supabase-server';
 import { getJobs } from '../data/jobs';
 import List from '../../components/List';
+import Jobs from './jobs';
 
 export const revalidate = 0;
 
