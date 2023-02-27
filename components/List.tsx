@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { marked } from 'marked';
-import * as DOMPurify from 'dompurify';
+//import * as DOMPurify from 'dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 import { useCurrentUser } from '../hooks/auth/useCurrentUser';
 
 export default function List(data: any) {
@@ -10,6 +11,8 @@ export default function List(data: any) {
   const [jobs, setJobs] = useState<Object[]>();
   const [currentJob, setCurrentJob] = useState<any>();
   const { user: currentUser } = useCurrentUser();
+
+  useEffect(() => {}, []);
 
   const getMarkdownText = (text: any) => {
     const clss = ' class="list-disc p-[1rem]"';
