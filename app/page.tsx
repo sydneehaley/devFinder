@@ -1,14 +1,9 @@
-import 'server-only';
 import Navbar from '../components/Navbar';
 import List from '../components/List';
-import { redirect } from 'next/navigation';
 import { createServerClient } from '../utils/supabase-server';
 import { getJobs } from './data/jobs';
 
-export const revalidate = 60;
-
 export default async function Index() {
-  // const supabase = createServerClient();
   const data = await getJobs('https://devfinder-client-api.herokuapp.com/api/jobs?populate=*');
 
   return (

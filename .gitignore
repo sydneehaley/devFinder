@@ -15,4 +15,7 @@ client/node_modules
 /app/realtime
 /pages/api/jobs
 /app/dashboard/jobs.tsx
-/app/dashboard
+/utils/supabase-browser.tsx
+/utils/supabase-server.tsx
+/types/database.types.ts
+/supabase

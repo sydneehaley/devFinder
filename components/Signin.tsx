@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
-import { Dispatch, SetStateAction } from 'react';
-import { useSupabase } from './supabase-provider';
+import { useRouter } from 'next/router';
 import { Transition, Dialog } from '@headlessui/react';
+import { useLogin } from '../hooks/auth/useLogin';
 
 type SignInProps = {
   isOpen: boolean;
@@ -10,41 +10,27 @@ type SignInProps = {
 };
 
 export default function Signin({ isOpen, closeModal }: SignInProps) {
-  const [user, setUser] = useState({ email: '', password: '' });
-  const { email, password } = user;
+  const [user, setUser] = useState({ identifier: '', password: '' });
+  const { identifier, password } = user;
   let [rememberUser, setRememberUser] = useState(false);
-  const { supabase } = useSupabase();
+
+  const { login } = useLogin();
 
   const handleOnChange = (e: any) => {
     e.preventDefault;
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const signInCredential = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    console.log({ data, error });
-  };
-
-  const signUpCredential = async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
-    console.log({ data, error });
-  };
-
-  const signIn = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    signInCredential(email, password);
+
+    login(identifier, password)
+      .then((res) => console.log(res))
+      .catch((e) => alert(e));
   };
 
-  const signUp = (e: any) => {
-    e.preventDefault();
-    signUpCredential(email, password);
-  };
+  console.log(identifier, password);
+
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -82,16 +68,14 @@ export default function Signin({ isOpen, closeModal }: SignInProps) {
                     <div className='w-full flex items-center justify-center'>
                       <h1 className='text-[2rem] leading-[10rem]'>Jobs for you</h1>
                     </div>
-                    <form className='w-full flex flex-col'>
+                    <form onChange={handleOnChange} className='w-full flex flex-col'>
                       <input
-                        onChange={handleOnChange}
-                        name='email'
-                        value={user.email}
+                        name='identifier'
+                        value={user.identifier}
                         placeholder='Email address'
                         className='border-b border-neutral-content/30 bg-transparent h-[6vh]  mb-[2rem] text-white placeholder:text-white/40 placeholder:font-regular placeholder:text-[14px] font-medium text-[16px] py-[1rem] focus:outline-0'
                       />
                       <input
-                        onChange={handleOnChange}
                         name='password'
                         value={user.password}
                         placeholder='Password'
@@ -115,14 +99,14 @@ export default function Signin({ isOpen, closeModal }: SignInProps) {
                         </div>
                       </div>
                       <div className='w-full flex flex-col items-center justify-between mt-[2rem]'>
-                        <button onClick={signIn} className='w-full bg-green-500 h-[5vh] rounded-lg text-white text-[14px] font-medium mb-[1.2rem]'>
+                        <button
+                          onClick={handleSubmit}
+                          className='w-full bg-green-500 h-[5vh] rounded-lg text-white text-[14px] font-medium mb-[1.2rem]'
+                        >
                           Sign in
                         </button>
 
-                        <button
-                          onClick={signUp}
-                          className='w-full border border-neutral-content/30 h-[5vh] rounded-lg text-white text-[14px] font-medium'
-                        >
+                        <button className='w-full border border-neutral-content/30 h-[5vh] rounded-lg text-white text-[14px] font-medium'>
                           Create an account
                         </button>
                       </div>

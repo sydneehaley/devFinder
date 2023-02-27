@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { signOut } from './supabase-auth-signout';
+// import { signOut } from './supabase-auth-signout';
 import { Menu } from '@headlessui/react';
 import { UserCircleIcon } from '@heroicons/react/24/solid';
 import Signin from './Signin';
@@ -73,9 +73,7 @@ export default function DropdownMenu(session: any) {
               <Menu.Item>
                 {({ active }) => (
                   <div className={`w-full flex items-center justify-center h-[5vh] ${active && 'hover:bg-neutral-content/10'}`}>
-                    <button onClick={signOut} className='w-[85%] flex font-regular'>
-                      Sign out
-                    </button>
+                    <button className='w-[85%] flex font-regular'>Sign out</button>
                   </div>
                 )}
               </Menu.Item>

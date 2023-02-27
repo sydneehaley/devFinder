@@ -1,5 +1,5 @@
 export async function getJobs(url: string) {
-  const res = await fetch(url, { next: { revalidate: 60 } });
+  const res = await fetch(url);
 
   if (!res.ok) {
     throw new Error('Failed to fetch data');
