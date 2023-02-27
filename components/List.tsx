@@ -27,7 +27,7 @@ export default function List(data: any) {
 
   return (
     <div className='w-full flex flex-col items-start justify-start'>
-      {currentUser ? (
+      {!currentUser ? (
         <div className='w-full flex flex-col items-start justify-start'>
           <div className='w-full mb-[3rem] flex items-center justify-start'>
             <h6 className='text-[20px] font-medium text-white'>Jobs near you</h6>
