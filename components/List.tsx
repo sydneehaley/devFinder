@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { marked } from 'marked';
-//import * as DOMPurify from 'dompurify';
-import DOMPurify from 'isomorphic-dompurify';
 import { useCurrentUser } from '../hooks/auth/useCurrentUser';
 
 export default function List(data: any) {
@@ -16,7 +14,7 @@ export default function List(data: any) {
 
   const getMarkdownText = (text: any) => {
     const clss = ' class="list-disc p-[1rem]"';
-    const parsed = DOMPurify.sanitize(marked.parse(text));
+    const parsed = marked.parse(text);
     const formattedText = parsed.slice(0, 3) + clss + parsed.slice(3, parsed.length);
 
     // console.log(marked.parse(text));
