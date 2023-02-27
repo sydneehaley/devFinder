@@ -1,10 +1,9 @@
 import Navbar from '../components/Navbar';
 import List from '../components/List';
-import { createServerClient } from '../utils/supabase-server';
 import { getJobs } from './data/jobs';
 
 export default async function Index() {
-  const data = await getJobs('https://devfinder-client-api.herokuapp.com/api/jobs?populate=*');
+  const data = await getJobs(`${process.env.NEXT_PUBLIC_STRAPI_API_URL_JOBS}`);
 
   return (
     <div className='w-full flex flex-col items-center justify-center'>
