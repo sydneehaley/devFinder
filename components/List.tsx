@@ -25,8 +25,6 @@ export default function List(data: any) {
     setCurrentJob(data?.data?.data?.find((job: any, i: number) => i === index));
   }, [index, data]);
 
-  console.log(data);
-
   return (
     <div className='w-full flex flex-col items-start justify-start'>
       {currentUser ? (
