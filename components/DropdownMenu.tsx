@@ -2,7 +2,7 @@
 import { useState } from 'react';
 // import { signOut } from './supabase-auth-signout';
 import { Menu } from '@headlessui/react';
-import { UserCircleIcon } from '@heroicons/react/24/solid';
+import { UserCircleIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import Signin from './Signin';
 
 export default function DropdownMenu(session: any) {
@@ -20,14 +20,17 @@ export default function DropdownMenu(session: any) {
     <>
       <Menu>
         <Menu.Button>
-          <UserCircleIcon className='h-7 w-7 mr-[0.3rem] text-neutral-content/50' />
+          <div className='flex items-center'>
+            <UserCircleIcon className='h-7 w-7 mr-[0.3rem] text-neutral-content/50' />
+            <ChevronDownIcon className='h-5 w-5 mr-[0.3rem] text-neutral-content/50' />
+          </div>
         </Menu.Button>
-        <Menu.Items className='w-[13vw] absolute left-[79vw] border border-neutral-content/30 bg-neutral-focus flex flex-col rounded-md top-[10vh] text-neutral-content'>
+        <Menu.Items className='w-[13vw] absolute left-[79vw] border border-neutral-content/30 bg-neutral-focus flex flex-col rounded-md top-[10vh] text-neutral-content text-[16px]'>
           <div className='py-[0.5rem]'>
             <Menu.Item>
               {({ active }) => (
                 <div className={`w-full flex items-center justify-center h-[5vh] ${active && 'hover:bg-neutral-content/10'}`}>
-                  <button onClick={openModal} className='w-[85%] text-[14px] flex'>
+                  <button onClick={openModal} className='w-[85%]  flex'>
                     Sign Up
                   </button>
                 </div>

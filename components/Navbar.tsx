@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon, MapPinIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import { location } from '../components/Location';
 import { GlobeAltIcon } from '@heroicons/react/24/solid';
 import DropdownMenu from './DropdownMenu';
@@ -42,33 +42,33 @@ export default function Navbar(session: any) {
                     fill='#22c55e'
                   ></path>
                 </svg>
-                {/* <p className='text-[16px] ml-4'>devFinder</p> */}
+                <p className='text-[16px] ml-4 '>devFinder</p>
               </div>
-              <form className='w-[90%] flex items-center justify-between ml-[2rem] px-[0.75rem]'>
+              {/* <form className='w-[90%] flex items-center justify-between ml-[2rem] px-[0.75rem]'>
                 <div className='w-[50%] flex items-center bg-neutral-focus/30 w-full border font-regular border-neutral-content/10 h-[5vh] rounded-full shadow-md'>
                   <button className='rounded-full  h-[4vh] w-[4vh] flex items-center justify-center'>
-                    <MagnifyingGlassIcon className='h-6 w-6 text-neutral-content/20' />
+                    <MagnifyingGlassIcon className='h-7 w-7 ml-[1rem] text-neutral-content/20' />
                   </button>
                   <input
                     placeholder='Search by title, salary, skill...'
-                    className='placeholder:text-[13px] placeholder:text-white/40 w-full  bg-transparent outline-0 pl-[0.2rem]'
+                    className='placeholder:font-theme placeholder:text-[15px] placeholder:text-white/40 w-full  bg-transparent outline-0 pl-[0.2rem]'
                   />
                 </div>
                 <div className='w-[48%] flex items-center bg-neutral-focus/30 w-full border font-regular border-neutral-content/10 h-[5vh] rounded-full shadow-md'>
                   <button className='rounded-full  h-[4vh] w-[4vh] flex items-center justify-center'>
-                    <MapPinIcon className='h-6 w-6 text-neutral-content/20' />
+                    <MapPinIcon className='h-7 w-7 ml-[1rem] text-neutral-content/20' />
                   </button>
                   <input
                     placeholder='City, state, or zip code'
-                    className='placeholder:text-[13px] placeholder:text-white/40 w-full bg-transparent outline-0 pl-[0.2rem]'
+                    className='placeholder:font-theme placeholder:text-[15px] placeholder:text-white/40 w-full bg-transparent outline-0 pl-[0.2rem]'
                   />
                 </div>
-              </form>
+              </form> */}
             </div>
           </div>
 
           <div className='w-[50%] h-[9vh] flex items-center justify-end text-neutral-content/20'>
-            <ul className='w-[35%] flex items-center justify-between font-medium text-[14px]'>
+            <ul className='w-[38%] flex items-center justify-between font-medium text-[14px]'>
               <li className='flex  h-[9vh] items-center flex items-center justify-center '>
                 <svg xmlns='http://www.w3.org/2000/svg' className='h-7 w-7 fill-neutral-content/50' viewBox='0 0 36 36'>
                   <path d='M6 12h6V6H6v6zm9 18h6v-6h-6v6zm-9 0h6v-6H6v6zm0-9h6v-6H6v6zm9 0h6v-6h-6v6zm9-15v6h6V6h-6zm-9 6h6V6h-6v6zm9 9h6v-6h-6v6zm0 9h6v-6h-6v6z' />
@@ -79,7 +79,7 @@ export default function Navbar(session: any) {
               </li>
               <li className='flex border-l border-neutral-content/10 flex  h-[7vh] flex items-center justify-center text-neutral-content/50 pl-[1.5rem] h-[5vh]'>
                 <GlobeAltIcon className='h-7 w-7 mr-[1rem]' />
-                {city === null ? 'Finding you...' : city}
+                <p className='text-[16px]'>{city === null ? 'Finding you...' : city}</p>
               </li>
             </ul>
           </div>
