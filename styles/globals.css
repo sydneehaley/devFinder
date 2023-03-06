@@ -20,43 +20,21 @@
 @import url('https://rsms.me/inter/inter.css');
 
 @font-face {
-  font-family: Circular;
-  font-style: normal;
-  font-weight: 300;
+  font-family: 'Satoshi-Variable';
+  src: url('../styles/Fonts/Satoshi/fonts/Satoshi-Variable.woff2') format('woff2'),
+    url('../styles/Fonts/Satoshi/fonts/Satoshi-VariableItalic.woff') format('woff'),
+    url('../styles/Fonts/Satoshi/fonts/Satoshi-Variable.ttf') format('truetype');
+  font-weight: 300 900;
   font-display: swap;
-  src: url('../styles/Fonts/Euclid\ Circular\ A\ Light.ttf');
+  font-style: normal;
 }
 
 @font-face {
-  font-family: Circular;
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('../styles/Fonts/Euclid\ Circular\ A\ Regular.ttf');
-}
-
-@font-face {
-  font-family: Circular;
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../styles/Fonts/Euclid\ Circular\ A\ Medium.ttf');
-}
-
-@font-face {
-  font-family: Circular;
-  font-style: normal;
+  font-family: 'Logo';
+  src: url('../styles/Fonts/Subjectivity/Subjectivity-Bold.otf') format('opentype');
   font-weight: 600;
   font-display: swap;
-  src: url('../styles/Fonts/Euclid\ Circular\ A\ SemiBold.ttf');
-}
-
-@font-face {
-  font-family: Circular;
   font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('../styles/Fonts/Euclid\ Circular\ A\ Bold.ttf');
 }
 
 a {

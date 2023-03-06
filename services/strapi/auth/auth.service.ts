@@ -11,8 +11,6 @@ export class AuthService {
     });
   }
 
-  //logs user in
-
   login = (identifier: string, password: string) => {
     return this.instance
       .post('/api/auth/local', {
@@ -35,16 +33,4 @@ export class AuthService {
         };
       });
   };
-
-  //returns user's content
-
-  // getMe = (userId: string) => {
-  //   return this.instance
-  //     .get(`/users/${userId}`, {
-  //       headers: getAuthorizationHeader(),
-  //     })
-  //     .then((res) => {
-  //       return res.data;
-  //     });
-  // };
 }

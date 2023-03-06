@@ -14,10 +14,17 @@ module.exports = {
       extrabold: '800',
       black: '900',
     },
+    fontSize: {
+      base: '1rem',
+      ['2xl']: '2rem',
+      ['3xl']: '3rem',
+      ['4xl']: '4rem',
+    },
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-        theme: 'Circular',
+        theme: 'Satoshi-Variable',
+        logo: 'Logo',
       },
     },
   },
@@ -30,6 +37,6 @@ module.exports = {
   ],
   // plugins: [require('daisyui')],
   daisyui: {
-    themes: ['forest'],
+    themes: ['acid'],
   },
 };

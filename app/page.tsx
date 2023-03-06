@@ -6,9 +6,9 @@ export default async function Index() {
   const data = await getJobs(`${process.env.NEXT_PUBLIC_STRAPI_API_URL_JOBS}`);
 
   return (
-    <div className='w-full flex flex-col items-center justify-center font-theme'>
+    <div className='bg-base-100 w-full flex flex-col items-center justify-center text-base-content'>
       <Navbar />
-      <div className='w-[80%] h-full mb-[7rem] flex  items-center justify-center  antialiased'>
+      <div className='w-full h-full mb-[7rem] flex  items-center justify-center antialiased'>
         <List data={data} />
       </div>
     </div>
