@@ -9,7 +9,7 @@ import Searchbar from './Searchbar';
 export default function List(data: any) {
   const [index, setIndex] = useState(0);
   const [jobs, setJobs] = useState<Object[]>();
-  const [currentJob, setCurrentJob] = useState<any>();
+  // const [currentJob, setCurrentJob] = useState<any>();
   const { user: currentUser } = useCurrentUser();
 
   useEffect(() => {}, []);
@@ -25,7 +25,7 @@ export default function List(data: any) {
 
   useEffect(() => {
     setJobs(data?.data?.data);
-    setCurrentJob(data?.data?.data?.find((job: any, i: number) => i === index));
+    // setCurrentJob(data?.data?.data?.find((job: any, i: number) => i === index));
   }, [index, data]);
 
   return (
@@ -37,7 +37,10 @@ export default function List(data: any) {
           <div className='w-full grid grid-cols-4 gap-[2rem] h-full rounded-xl  mt-[3rem]'>
             <ul className='grid col-span-3 gap-y-[3rem] list-none h-full  rounded-l-xl '>
               {jobs?.map((job: any, i: any) => (
-                <li className='w-full h-full border border-gray-300 rounded-xl flex items-center py-[2rem] justify-center h-full cursor-pointer'>
+                <li
+                  key={i}
+                  className='w-full h-full border border-gray-300 rounded-xl flex items-center py-[2rem] justify-center h-full cursor-pointer'
+                >
                   <div className='leading-[1.75rem] w-[93%]'>
                     <h6 className='text-[16px] font-bold leading-[3rem]'>{job?.attributes.job_title}</h6>
                     <h6 className='text-[14px] font-medium'>{job?.attributes.company_id.data?.attributes?.company_name}</h6>
