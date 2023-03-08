@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, Bars3Icon } from '@heroicons/react/24/outline';
 import { location } from '../components/Location';
 import { GlobeAltIcon } from '@heroicons/react/24/solid';
 import DropdownMenu from './DropdownMenu';
@@ -24,10 +24,10 @@ export default function Navbar(session: any) {
   }, []);
 
   return (
-    <div className='w-full h-[9vh] border-b bg-transparent flex justify-center items-center antialiased text-base-content'>
-      <div className='w-[90%] flex justify-center items-center'>
+    <div className='w-full h-[9vh]  bg-transparent dark:border-base-100/10 flex justify-center items-center antialiased'>
+      <div className='w-[80%] flex justify-center items-center'>
         <div className='w-full flex'>
-          <div className='font-sans font-bold w-[50%]'>
+          <div className=' font-bold w-[50%]'>
             <div className='w-full flex items-center justify-start h-[9vh]'>
               <div className='flex items-center'>
                 {/* <svg id='logo-73' width='45' height='40' viewBox='0 0 60 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -42,9 +42,9 @@ export default function Navbar(session: any) {
                     fill='currentColor'
                   ></path>
                 </svg> */}
-                <p className='text-[25px] ml-4  font-logo  font-bold text-base-content tracking-[-1px]'>devfinder</p>
+                <p className='text-[25px] text-gray-700 ml-4  font-logo  font-bold dark:text-base-100 tracking-[-1px]'>devfinder</p>
               </div>
-              <ul className='flex w-[53%] ml-[3rem] font-semibold justify-between text-[14px] text-[15px]'>
+              {/* <ul className='flex w-[53%] ml-[3rem] font-semibold justify-between text-[14px] text-[15px]'>
                 <li className='flex items-center justify-center'>
                   Browse Jobs <ChevronDownIcon className='h-5 w-5 ml-[0.5rem]  flex items-center justify-center' />
                 </li>
@@ -54,18 +54,23 @@ export default function Navbar(session: any) {
                 <li className='flex items-center justify-center'>
                   Resources <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center' />
                 </li>
-              </ul>
+              </ul> */}
             </div>
           </div>
 
           <div className='w-[50%] h-[9vh] flex items-center justify-end'>
-            <ul className='flex w-[30%] ml-[3rem] justify-between text-[15px] font-semibold'>
+            {/* <ul className='flex w-[70%] ml-[3rem] justify-between text-[15px] font-medium'>
+              <li className='flex items-center justify-center'>Jobs</li>
+              <li className='flex items-center justify-center'>Companies</li>
               <li className='flex items-center justify-center'>
-                For Employers <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center' />
+                Resources <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center' />
               </li>
               <li className='flex items-center justify-center'>Sign In</li>
-              {/* <button className='bg-accent rounded-full h-[4rem] w-[44%] font-semibold'>Post A Job</button> */}
-            </ul>
+            </ul> */}
+            <div className='flex w-[67%] items-center justify-end pr-[3rem]'>
+              {' '}
+              <Bars3Icon className='w-9 h-9' />
+            </div>
           </div>
         </div>
       </div>
