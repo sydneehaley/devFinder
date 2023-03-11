@@ -5,7 +5,7 @@ import '../dist/output.css';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className='bg-neutral' lang='en'>
+    <html className='dark:bg-neutral-900' lang='en'>
       <head>
         <title>Jobs Near You | devFinder</title>
       </head>

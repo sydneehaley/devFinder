@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ChevronDownIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, Bars3Icon, MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { location } from '../components/Location';
 import { GlobeAltIcon } from '@heroicons/react/24/solid';
 import DropdownMenu from './DropdownMenu';
@@ -24,10 +24,10 @@ export default function Navbar(session: any) {
   }, []);
 
   return (
-    <div className='w-full h-[9vh]  bg-transparent dark:border-base-100/10 flex justify-center items-center antialiased'>
+    <div className='w-full h-[10vh] border-b bg-transparent dark:border-neutral-400/10 flex justify-center items-center antialiased'>
       <div className='w-[80%] flex justify-center items-center'>
         <div className='w-full flex'>
-          <div className=' font-bold w-[50%]'>
+          <div className=' font-bold w-[25%]'>
             <div className='w-full flex items-center justify-start h-[9vh]'>
               <div className='flex items-center'>
                 {/* <svg id='logo-73' width='45' height='40' viewBox='0 0 60 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -42,32 +42,51 @@ export default function Navbar(session: any) {
                     fill='currentColor'
                   ></path>
                 </svg> */}
-                <p className='text-[25px] text-gray-700 ml-4  font-logo  font-bold dark:text-base-100 tracking-[-1px]'>devfinder</p>
+                <p className='text-[25px] text-neutral-800 ml-4  font-logo  font-bold dark:text-neutral-400 tracking-[-1px]'>devfinder</p>
               </div>
-              {/* <ul className='flex w-[53%] ml-[3rem] font-semibold justify-between text-[14px] text-[15px]'>
-                <li className='flex items-center justify-center'>
-                  Browse Jobs <ChevronDownIcon className='h-5 w-5 ml-[0.5rem]  flex items-center justify-center' />
-                </li>
-                <li className='flex items-center justify-center'>
-                  Companies <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center' />
-                </li>
-                <li className='flex items-center justify-center'>
-                  Resources <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center' />
-                </li>
-              </ul> */}
             </div>
           </div>
+          <div className='w-full flex items-center justify-center'>
+            <form className='w-[43%] border border-neutral-300  shadow-lg dark:border-neutral-400/10 rounded-full h-[5vh] flex items-center justify-between p-[1rem]'>
+              <div className='w-[30%] flex bg-transparent  w-full border-r dark:border-base-100/10 font-regular'>
+                <div className='w-full flex'>
+                  {/* <button className='rounded-full h-[4vh] h-[7vh] flex items-center justify-center'>
+                    <MagnifyingGlassIcon className='h-7 w-7  mr-[0.5rem] dark:text-base-100/50' />
+                  </button> */}
+                  <input
+                    placeholder='Job title'
+                    className='placeholder:text-[14px] placeholder:flex placeholder:text-neutral-600 dark:placeholder:text-base-100/50 placeholder:font-medium placeholder:w-full placeholder:text-center w-full bg-transparent outline-0 text-[16px]'
+                  />
+                </div>
+              </div>
+              <div className='w-[30%] flex bg-transparent w-full font-regular border-r dark:border-base-100/10'>
+                <div className='w-full flex '>
+                  <input
+                    placeholder='Location'
+                    className='placeholder:text-[14px] placeholder:text-neutral-600 dark:placeholder:text-base-100/50 placeholder:font-medium placeholder:text-center w-full  bg-transparent outline-0  text-[16px]'
+                  />
+                </div>
+              </div>
 
-          <div className='w-[50%] h-[9vh] flex items-center justify-end'>
+              <div className='w-[30%] flex bg-transparent w-full font-regular'>
+                <div className='w-full flex'>
+                  <input
+                    placeholder='Salary'
+                    className='placeholder:text-[14px] placeholder:text-neutral-600 dark:placeholder:text-base-100/50 placeholder:font-medium placeholder:text-center  w-full  bg-transparent outline-0  text-[16px]'
+                  />
+                </div>
+              </div>
+              <button className='rounded-full dark:bg-neutral-600 w-[8%] text-[16px] dark:text-base-content font-semibold flex items-center justify-center h-[3vh]'>
+                <MagnifyingGlassIcon className='w-5 h-5 text-neutral-400 stroke-[2.5px]' />
+              </button>
+            </form>
+          </div>
+
+          <div className='w-[25%] h-[9vh] flex items-center justify-end'>
             {/* <ul className='flex w-[70%] ml-[3rem] justify-between text-[15px] font-medium'>
-              <li className='flex items-center justify-center'>Jobs</li>
-              <li className='flex items-center justify-center'>Companies</li>
-              <li className='flex items-center justify-center'>
-                Resources <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center' />
-              </li>
-              <li className='flex items-center justify-center'>Sign In</li>
+              <li className='flex items-center justify-center bg-error-content p-[1rem] rounded-full text-neutral-900 w-[10rem]'>Post a job</li>
             </ul> */}
-            <div className='flex w-[67%] items-center justify-end pr-[3rem]'>
+            <div className='flex w-[67%] items-center justify-end'>
               {' '}
               <Bars3Icon className='w-9 h-9' />
             </div>

@@ -13,7 +13,6 @@ export default function List(data: any) {
   const { user: currentUser } = useCurrentUser();
 
   useEffect(() => {}, []);
-
   const getMarkdownText = (text: any) => {
     const clss = ' class="list-disc p-[1rem]"';
     const parsed = marked.parse(text);
@@ -28,21 +27,21 @@ export default function List(data: any) {
     // setCurrentJob(data?.data?.data?.find((job: any, i: number) => i === index));
   }, [index, data]);
 
-  console.log(jobs);
+  const buttons = [{ label: 'Software Engineer' }, { label: 'Cloud Engineer' }, { label: 'UX Designer' }, { label: 'Lead React UI Developer' }];
 
   return (
     <div className='w-full h-[85%] flex flex-col items-center justify-center'>
       <Searchbar />
-      <div className='w-full mt-[4rem] flex flex-col items-center justify-center'>
+      <div className='w-full flex flex-col items-center justify-center'>
         <div className='w-[80%] flex items-center'>
           <div className='w-[70%]'>
-            <p className='mb-[1rem] text-[16px] font-semibold text-gray-700'>All jobs</p>
+            {/* <p className='mb-[1rem] text-[16px] font-semibold text-neutral-800 dark:text-base-100'>All jobs</p> */}
             <div className='w-full grid grid-cols-5 gap-[2rem] h-full rounded-xl  mt-[2rem]'>
               <ul className='grid col-span-3 gap-y-[2rem] list-none h-full  rounded-l-xl '>
                 {jobs?.map((job: any, i: any) => (
                   <li
                     key={i}
-                    className='w-full h-[30vh] border border-gray-300 dark:border-base-100/10 dark:hover:bg-base-content/10 rounded-xl flex items-center  justify-center h-full cursor-pointer'
+                    className='w-full h-[30vh] border border-neutral-300 dark:border-neutral-400/10 dark:hover:bg-black/10 rounded-xl flex items-center  justify-center h-full cursor-pointer'
                   >
                     <div className='leading-[1.75rem] w-[92%] flex flex-col'>
                       <button className='h-[4rem] w-[4rem] rounded-full flex items-center justify-center  mr-[1.5rem] mt-[0.5rem]'>
@@ -50,19 +49,21 @@ export default function List(data: any) {
                       </button>
                       <div className='mt-[1rem]'>
                         <div>
-                          <h6 className='text-[16px] text-gray-700 dark:text-white font-semibold leading-[3rem]'>{job?.attributes.job_title}</h6>
+                          <h6 className='text-[16px] text-neutral-800 dark:text-neutral-400 font-semibold leading-[3rem]'>
+                            {job?.attributes.job_title}
+                          </h6>
                           <h6 className='text-[14px] font-regular'>{job?.attributes.company_id.data?.attributes?.company_name}</h6>
                           <h6 className='text-[14px] font-regular'>{job?.attributes.location}</h6>
                         </div>
                         {/* <p className='text-[14px] mt-[2rem] h-[5vh] overflow-hidden w-[60%] '>{job?.attributes.description}</p> */}
                         <div className='mt-[2rem] flex'>
                           {job?.attributes.remote ? (
-                            <button className='border border-gray-300 dark:border-base-100/10  rounded-full px-[18px] py-[8px] max-w-[200px] font-semibold text-[13px] flex items-center justify-center mr-[8px]'>
+                            <button className='border border-neutral-300 dark:border-base-100/10 dark:bg-black/10  rounded-full px-[18px] py-[8px] max-w-[200px] font-semibold text-[13px] flex items-center justify-center mr-[8px]'>
                               <GlobeAltIcon className='w-6 h-6 text-error-content mr-[0.5rem]' /> Remote
                             </button>
                           ) : null}
                           {job?.attributes.salary ? (
-                            <button className='border border-gray-300 dark:border-base-100/10  rounded-full px-[18px] py-[8px] max-w-[200px] font-semibold text-[13px] flex items-center justify-center mr-[8px]'>
+                            <button className='border border-neutral-300 dark:border-base-100/10 dark:bg-black/10  rounded-full px-[18px] py-[8px] max-w-[200px] font-semibold text-[13px] flex items-center justify-center mr-[8px]'>
                               <BanknotesIcon className='w-6 h-6 text-success mr-[0.5rem]' /> {job?.attributes.salary}
                             </button>
                           ) : null}
@@ -74,16 +75,16 @@ export default function List(data: any) {
               </ul>
 
               <div className='col-span-2'>
-                <div className='w-full shadow-md border border-gray-300 dark:border-base-100/10 rounded-xl h-[40vh] flex items-center justify-center'>
+                <div className='w-full shadow-md border border-neutral-300 dark:border-neutral-400/10 rounded-xl h-[40vh] flex items-center justify-center'>
                   <div className='w-[90%] flex flex-col items-start justify-start'>
-                    <div className='bg-transparent p-[1rem] rounded-full mb-[2rem]'>
+                    <div className='border dark:border-neutral-400/10 p-[1rem] rounded-full flex items-center justify-center mb-[2rem]'>
                       <EnvelopeIcon className='w-7 h-7' />
                     </div>
-                    <h5 className='font-semibold text-[16px] leading-[4rem] text-gray-700 dark:text-base-100'>Subscribe for daily jobs</h5>
+                    <h5 className='font-semibold text-[16px] leading-[4rem] text-neutral-800 dark:text-neutral-400'>Subscribe for daily jobs</h5>
                     <p className='text-[14px] font-regular'>Subscribe to our newsletter to get our latest job postings directly in your inbox.</p>
                     <form className='w-full flex flex-col mt-[2rem]'>
-                      <input className='w-full border rounded-lg p-[1rem] dark:bg-transparent dark:border-base-100/10'></input>
-                      <button className='bg-gray-700 dark:bg-base-content/30 text-white p-[1rem] mt-[1rem] text-[14px] font-semibold rounded-lg'>
+                      <input className='w-full border rounded-lg p-[1rem] bg-transparent dark:border-base-100/10'></input>
+                      <button className='bg-neutral-800 dark:bg-base-content/30 dark:text-neutral-300 p-[1rem] mt-[1rem] text-[14px] font-medium rounded-lg'>
                         Subscribe
                       </button>
                     </form>
@@ -92,15 +93,15 @@ export default function List(data: any) {
 
                 <div className='mt-[2rem]'>
                   <div className='flex flex-col items-start justify-center'>
-                    <h5 className='font-semibold text-black dark:text-base-100 text-[15px] leading-[5rem]'>Popular careers</h5>
+                    <h5 className='font-semibold text-neutral-800 dark:text-neutral-400 text-[15px] leading-[5rem]'>Popular careers</h5>
                     <div className='flex flex-wrap gap-[0.5rem]'>
-                      <button className='bg-gray-100 dark:bg-base-content/30 p-[1rem] text-base rounded-full font-medium '>Software Engineer</button>
-                      <button className='bg-gray-100 dark:bg-base-content/30 p-[1rem] text-base rounded-full font-medium '>Cloud Engineer</button>
-                      <button className='bg-gray-100 dark:bg-base-content/30 p-[1rem] text-base rounded-full font-medium '>UX Designer</button>
-                      <button className='bg-gray-100 dark:bg-base-content/30 p-[1rem] text-base rounded-full font-medium '>UX Designer</button>
-                      <button className='bg-gray-100 dark:bg-base-content/30 p-[1rem] text-base rounded-full font-medium '>
-                        Lead React UI Developer
-                      </button>
+                      {buttons.map((button, i) => {
+                        return (
+                          <button className='bg-neutral-100 text-neutral-800 dark:bg-base-content/30 dark:text-neutral-400 p-[1rem] text-base rounded-full font-semibold '>
+                            {button.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
