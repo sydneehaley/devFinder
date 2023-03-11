@@ -97,7 +97,10 @@ export default function List(data: any) {
                     <div className='flex flex-wrap gap-[0.5rem]'>
                       {buttons.map((button, i) => {
                         return (
-                          <button className='bg-neutral-100 text-neutral-800 dark:bg-base-content/30 dark:text-neutral-400 p-[1rem] text-base rounded-full font-semibold '>
+                          <button
+                            key={i}
+                            className='bg-neutral-100 text-neutral-800 dark:bg-base-content/30 dark:text-neutral-400 p-[1rem] text-base rounded-full font-semibold '
+                          >
                             {button.label}
                           </button>
                         );

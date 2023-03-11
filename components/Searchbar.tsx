@@ -49,7 +49,10 @@ export default function Searchbar() {
           <div className='w-full h-[11vh] grid grid-cols-9 items-center gap-[1rem]'>
             {buttons.map((button, i) => {
               return (
-                <button className='border border-neutral-300 dark:border-neutral-400/10   rounded-full px-[18px] py-[8px] max-w-[200px] max-h-[40px] font-medium text-[13px] flex items-center justify-center dark:text-neutral-400'>
+                <button
+                  key={i}
+                  className='border border-neutral-300 dark:border-neutral-400/10   rounded-full px-[18px] py-[8px] max-w-[200px] max-h-[40px] font-medium text-[13px] flex items-center justify-center dark:text-neutral-400'
+                >
                   {button.label} <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center dark:text-base-100/50' />
                 </button>
               );
