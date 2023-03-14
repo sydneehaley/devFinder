@@ -9,12 +9,12 @@ export default function Searchbar() {
     { label: 'Salary range' },
     { label: 'Permanent' },
     { label: 'Entry level' },
-    { label: 'Urgent hire' },
-    { label: 'International' },
+    // { label: 'Urgent hire' },
+    // { label: 'International' },
     { label: 'Volunteer' },
   ];
   return (
-    <div className='w-full h-[11vh]  dark:border-base-100/10 flex flex-col items-center justify-start'>
+    <div className='w-full h-[8vh] shadow-md shadow-gray-200/50  dark:border-base-100/10 flex flex-col items-center justify-center'>
       <div className='w-[80%]'>
         <form className='w-full'>
           {/* <div className='flex w-full'>
@@ -46,17 +46,24 @@ export default function Searchbar() {
               </button>
             </div> 
           </div> */}
-          <div className='w-full h-[11vh] grid grid-cols-9 items-center gap-[1rem]'>
-            {buttons.map((button, i) => {
-              return (
-                <button
-                  key={i}
-                  className='border border-neutral-300 dark:border-neutral-400/10   rounded-full px-[18px] py-[8px] max-w-[200px] max-h-[40px] font-medium text-[13px] flex items-center justify-center dark:text-neutral-400'
-                >
-                  {button.label} <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center dark:text-base-100/50' />
-                </button>
-              );
-            })}
+          <div className='flex'>
+            <div className='border-r pr-[1rem] mr-[1rem]'>
+              <button className='bg-neutral-900 border-neutral-300 dark:border-neutral-400/10   rounded-full px-[18px] py-[8px] max-w-[200px] max-h-[40px] font-medium text-[16px] flex items-center justify-center dark:text-neutral-400 text-white'>
+                Jobs <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center dark:text-base-100/50' />
+              </button>
+            </div>
+            <div className='w-full grid grid-cols-7 items-center gap-[1rem]'>
+              {buttons.map((button, i) => {
+                return (
+                  <button
+                    key={i}
+                    className='border border-[1.5px] border-neutral-300 dark:border-neutral-400/10   rounded-full px-[18px] py-[8px]  max-h-[40px] font-medium text-[16px] flex items-center justify-center dark:text-neutral-400'
+                  >
+                    {button.label} <ChevronDownIcon className='h-5 w-5 ml-[0.5rem] flex items-center justify-center dark:text-base-100/50' />
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </form>
       </div>

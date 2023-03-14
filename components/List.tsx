@@ -35,13 +35,14 @@ export default function List(data: any) {
       <div className='w-full flex flex-col items-center justify-center'>
         <div className='w-[80%] flex items-center'>
           <div className='w-[70%]'>
-            {/* <p className='mb-[1rem] text-[16px] font-semibold text-neutral-800 dark:text-base-100'>All jobs</p> */}
+            <h6 className=' mt-[3rem] text-[16px] leading-[3rem] font-semibold text-neutral-800 dark:text-base-100'>Recent jobs</h6>
+            <p>Show all job results</p>
             <div className='w-full grid grid-cols-5 gap-[2rem] h-full rounded-xl  mt-[2rem]'>
               <ul className='grid col-span-3 gap-y-[2rem] list-none h-full  rounded-l-xl '>
                 {jobs?.map((job: any, i: any) => (
                   <li
                     key={i}
-                    className='w-full h-[30vh] border border-neutral-300 dark:border-neutral-400/10 dark:hover:bg-black/10 rounded-xl flex items-center  justify-center h-full cursor-pointer'
+                    className='w-full h-[30vh] shadow-md shadow-gray-200/50  border border-neutral-300 dark:border-neutral-400/10 dark:hover:bg-black/10 rounded-xl flex items-center  justify-center h-full cursor-pointer'
                   >
                     <div className='leading-[1.75rem] w-[92%] flex flex-col'>
                       <button className='h-[4rem] w-[4rem] rounded-full flex items-center justify-center  mr-[1.5rem] mt-[0.5rem]'>
@@ -49,7 +50,7 @@ export default function List(data: any) {
                       </button>
                       <div className='mt-[1rem]'>
                         <div>
-                          <h6 className='text-[16px] text-neutral-800 dark:text-neutral-400 font-semibold leading-[3rem]'>
+                          <h6 className='text-[17px] text-neutral-700 dark:text-neutral-400 font-semibold leading-[3rem]'>
                             {job?.attributes.job_title}
                           </h6>
                           <h6 className='text-[14px] font-regular'>{job?.attributes.company_id.data?.attributes?.company_name}</h6>
@@ -75,16 +76,16 @@ export default function List(data: any) {
               </ul>
 
               <div className='col-span-2'>
-                <div className='w-full shadow-md border border-neutral-300 dark:border-neutral-400/10 rounded-xl h-[40vh] flex items-center justify-center'>
+                <div className='w-full shadow-md shadow-gray-200/50  border border-neutral-300 dark:border-neutral-400/10 rounded-xl h-[40vh] flex items-center justify-center'>
                   <div className='w-[90%] flex flex-col items-start justify-start'>
                     <div className='border dark:border-neutral-400/10 p-[1rem] rounded-full flex items-center justify-center mb-[2rem]'>
                       <EnvelopeIcon className='w-7 h-7' />
                     </div>
-                    <h5 className='font-semibold text-[16px] leading-[4rem] text-neutral-800 dark:text-neutral-400'>Subscribe for daily jobs</h5>
+                    <h5 className='font-semibold text-[17px] leading-[4rem] text-neutral-700 dark:text-neutral-400'>Subscribe for daily jobs</h5>
                     <p className='text-[14px] font-regular'>Subscribe to our newsletter to get our latest job postings directly in your inbox.</p>
                     <form className='w-full flex flex-col mt-[2rem]'>
                       <input className='w-full border rounded-lg p-[1rem] bg-transparent dark:border-base-100/10'></input>
-                      <button className='bg-neutral-800 dark:bg-base-content/30 dark:text-neutral-300 p-[1rem] mt-[1rem] text-[14px] font-medium rounded-lg'>
+                      <button className='bg-neutral-800 text-base-100 dark:bg-base-content/30 dark:text-neutral-300 p-[1rem] mt-[1rem] text-[14px] font-medium rounded-lg'>
                         Subscribe
                       </button>
                     </form>
@@ -99,7 +100,7 @@ export default function List(data: any) {
                         return (
                           <button
                             key={i}
-                            className='bg-neutral-100 text-neutral-800 dark:bg-base-content/30 dark:text-neutral-400 p-[1rem] text-base rounded-full font-semibold '
+                            className='bg-gray-100 text-neutral-800 dark:bg-base-content/30 dark:text-neutral-400 p-[1rem] text-base rounded-full font-semibold '
                           >
                             {button.label}
                           </button>
