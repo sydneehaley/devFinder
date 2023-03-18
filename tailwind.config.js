@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors');
+// const colors = require('tailwindcss/colors');
 module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
@@ -17,6 +17,7 @@ module.exports = {
     },
     fontSize: {
       base: '1rem',
+      body: '16px',
       ['2xl']: '2rem',
       ['3xl']: '3rem',
       ['4xl']: '4rem',
@@ -27,9 +28,9 @@ module.exports = {
         theme: 'Satoshi-Variable',
         logo: 'Logo',
       },
-      colors: {
-        ...colors,
-      },
+      // colors: {
+      //   ...colors,
+      // },
     },
   },
   plugins: [

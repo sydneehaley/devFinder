@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { ChevronDownIcon, Bars3Icon, MagnifyingGlassIcon, MapPinIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
+import { BsCaretDownFill } from 'react-icons/bs';
+import { TbBriefcase } from 'react-icons/tb';
 import { location } from '../components/Location';
 import DropdownMenu from './DropdownMenu';
 import Signin from './Signin';
@@ -23,9 +25,9 @@ export default function Navbar(session: any) {
   }, []);
 
   return (
-    <div className='w-full h-[8vh] border-b bg-transparent dark:border-neutral-400/10 flex justify-center items-center antialiased'>
-      <div className='w-[80%] flex justify-center items-center'>
-        <div className='w-[50%] h-[9vh] flex items-center justify-start'>
+    <div className='w-full h-[8vh] border-b bg-transparent dark:border-neutral-400/10 flex justify-center items-center antialiased px-[3rem] '>
+      <div className='w-full flex justify-start items-center '>
+        <div className='w-[25%] h-[9vh] flex items-center justify-start'>
           <div className='flex items-center'>
             <svg id='logo-73' width='45' height='40' viewBox='0 0 60 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
               <path
@@ -43,11 +45,14 @@ export default function Navbar(session: any) {
           </div>
         </div>
 
-        <div className='w-[50%] h-[9vh] flex items-center justify-end'>
-          {/* <ul className='flex w-[70%] ml-[3rem] justify-between text-[15px] font-medium'>
-              <li className='flex items-center justify-center bg-error-content p-[1rem] rounded-full text-neutral-900 w-[10rem]'>Post a job</li>
-            </ul> */}
-          <ul className='flex w-[20%] items-center justify-between'>
+        <div className='w-[50%] flex items-center justify-center'>
+          <button className='bg-neutral rounded-full flex items-center justify-center text-[18px] font-medium text-base-100 w-[18%] p-[0.5rem]'>
+            Jobs <ChevronDownIcon className='ml-[1rem] h-5 w-5 stroke-[3px]' />
+          </button>
+        </div>
+
+        <div className='w-[25%] h-[9vh] flex items-center justify-end'>
+          <ul className='flex items-center justify-between'>
             <li className='flex'>
               <MagnifyingGlassIcon className='w-7 h-7 mr-[2rem] stroke-[1.5px]' />
             </li>
