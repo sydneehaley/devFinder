@@ -21,8 +21,7 @@
 
 @font-face {
   font-family: 'Satoshi-Variable';
-  src: url('../styles/Fonts/Satoshi/fonts/Satoshi-Variable.woff2') format('woff2'),
-    url('../styles/Fonts/Satoshi/fonts/Satoshi-VariableItalic.woff') format('woff'),
+  src: url('../styles/Fonts/Satoshi/fonts/Satoshi-Variable.woff2') format('woff2'), url('../styles/Fonts/Satoshi/fonts/Satoshi-VariableItalic.woff') format('woff'),
     url('../styles/Fonts/Satoshi/fonts/Satoshi-Variable.ttf') format('truetype');
   font-weight: 300 900;
   font-display: swap;
@@ -30,9 +29,33 @@
 }
 
 @font-face {
-  font-family: 'Logo';
-  src: url('../styles/Fonts/Subjectivity/Subjectivity-Bold.otf') format('opentype');
-  font-weight: 600;
+  font-family: 'Theme';
+  src: url('../styles/Fonts/Graphik/Graphik-Regular-Trial.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Theme';
+  src: url('../styles/Fonts/Graphik/Graphik-Medium-Trial.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Theme';
+  src: url('../styles/Fonts/Graphik/Graphik-Bold-Trial.otf') format('opentype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Theme';
+  src: url('../styles/Fonts/Graphik/Graphik-Black-Trial.otf') format('opentype');
+  font-weight: 900;
   font-display: swap;
   font-style: normal;
 }

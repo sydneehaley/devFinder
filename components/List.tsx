@@ -30,69 +30,91 @@ export default function List(data: any) {
   const buttons = [{ label: 'Software Engineer' }, { label: 'Cloud Engineer' }, { label: 'UX Designer' }, { label: 'Lead React UI Developer' }];
 
   return (
-    <div className='w-full  flex flex-col items-center justify-center'>
+    <div className='w-full flex flex-col'>
       <Searchbar />
-      <div className='w-full  flex flex-col items-center justify-center'>
-        <div className='w-full flex items-center'>
-          <div className='w-full grid grid-cols-12 grid-rows-2  h-full rounded-xl'>
-            <div className='grid col-span-3 border-r px-[3rem] '>
-              <div className='flex flex-col mb-[3rem]'>
-                <h6 className=' mt-[3rem] text-2xl leading-[3rem] font-bold text-neutral-800'>Jobs</h6>
-                <p className='text-body'>Showing 6 results</p>
-              </div>
-              <ul className='flex flex-col list-none h-full  gap-y-[1rem] rounded-l-xl '>
-                {jobs?.map((job: any, i: any) => (
-                  <li key={i} className='w-full h-[30vh]   border hover:border-neutral/40 rounded-xl flex items-center  justify-center h-full cursor-pointer'>
-                    <div className='leading-[1.75rem] w-[84%] flex flex-col'>
-                      <button className='bg-neutral-content/10 h-[4rem] w-[4rem] rounded-lg flex items-center justify-center  mr-[1.5rem] mt-[0.5rem]'>
-                        <BuildingOffice2Icon className='h-9 w-9 stroke-[1px]' />
-                      </button>
-                      <div className='mt-[2rem]'>
-                        <div>
-                          <h6 className='text-[18px] text-neutral-700 font-semibold leading-[3rem]'>{job?.attributes.job_title}</h6>
-                          <h6 className='text-body font-regular leading-[2rem]'>{job?.attributes.company_id.data?.attributes?.company_name}</h6>
-                          <h6 className='text-body font-regular'>{job?.attributes.location}</h6>
-                        </div>
-                        {/* <p className='text-[14px] mt-[2rem] h-[5vh] overflow-hidden w-[60%] '>{job?.attributes.description}</p> */}
-                        <div className='mt-[3rem] flex'>
-                          {job?.attributes.remote ? (
-                            <button className='border border-neutral/40 rounded-full px-[18px] py-[8px] max-w-[200px] font-bold text-[13px] flex items-center justify-center mr-[8px]'>
-                              <GlobeAltIcon className='w-6 h-6  mr-[0.5rem] stroke-[1px]' /> Remote
-                            </button>
-                          ) : null}
-                          {job?.attributes.salary ? (
-                            <button className='border border-neutral/40 rounded-full px-[18px] py-[8px] max-w-[200px] font-bold text-[13px] flex items-center justify-center mr-[8px]'>
-                              <BanknotesIcon className='w-6 h-6 mr-[0.5rem] stroke-[1px]' /> {job?.attributes.salary}
-                            </button>
-                          ) : null}
-                        </div>
+
+      <div className='w-full flex relative z-0'>
+        <div className='w-[25vw] absolute top-0'>
+          <div className='w-[25vw] h-full border-r px-[3rem] pb-[5rem]'>
+            <div className='flex flex-col mb-[3rem]'>
+              <h6 className=' mt-[3rem] text-2xl leading-[3rem] font-medium text-neutral-800'>Jobs</h6>
+              <p className='text-body'>Showing 6 results</p>
+            </div>
+            <ul className='flex flex-col list-none h-full gap-y-[1rem] rounded-l-xl'>
+              {jobs?.map((job: any, i: any) => (
+                <li onClick={() => setIndex(i)} key={i} className='w-full h-[30vh]   border hover:border-neutral/40 rounded-xl flex items-center  justify-center h-full cursor-pointer'>
+                  <div className='leading-[1.75rem] w-[84%] flex flex-col'>
+                    <button className='bg-neutral-content/10 h-[4rem] w-[4rem] rounded-lg flex items-center justify-center  mr-[1.5rem] mt-[0.5rem]'>
+                      <BuildingOffice2Icon className='h-9 w-9 stroke-[1px]' />
+                    </button>
+                    <div className='mt-[2rem]'>
+                      <div>
+                        <h6 className='text-[18px] text-neutral-700 font-medium leading-[3rem]'>{job?.attributes.job_title}</h6>
+                        <h6 className='text-body font-regular leading-[2rem]'>{job?.attributes.company_id.data?.attributes?.company_name}</h6>
+                        <h6 className='text-body font-regular'>{job?.attributes.location}</h6>
+                      </div>
+                      {/* <p className='text-[14px] mt-[2rem] h-[5vh] overflow-hidden w-[60%] '>{job?.attributes.description}</p> */}
+                      <div className='mt-[3rem] flex'>
+                        {job?.attributes.remote ? (
+                          <button className='border border-neutral/40 rounded-full px-[18px] py-[8px] max-w-[200px] font-medium text-[13px] flex items-center justify-center mr-[8px]'>
+                            <GlobeAltIcon className='w-6 h-6  mr-[0.5rem] stroke-[1px]' /> Remote
+                          </button>
+                        ) : null}
+                        {job?.attributes.salary ? (
+                          <button className='border border-neutral/40 rounded-full px-[18px] py-[8px] max-w-[200px] font-medium text-[13px] flex items-center justify-center mr-[8px]'>
+                            <BanknotesIcon className='w-6 h-6 mr-[0.5rem] stroke-[1px]' /> {job?.attributes.salary}
+                          </button>
+                        ) : null}
                       </div>
                     </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className='col-span-9 bg-base-200/50 text-body'>
-              <div className='w-full flex items-center justify-center   p-[3rem] overflow-auto'>
-                <div className='w-[80%] bg-white p-[3rem]  rounded-lg'>
-                  <div className='mb-[4rem]'>
-                    <h1 className='text-[36px] font-semibold   leading-[7rem]'>{currentJob?.attributes.job_title}</h1>
-                    <h6 className='font-regular  leading-[2rem]'>{currentJob?.attributes.company_id?.data?.attributes?.company_name}</h6>
-                    <h6 className='font-regular  leading-[2rem]'>{currentJob?.attributes.location}</h6>
-                    <button className='border border-neutral/40 text-neutral font-semibold hover:bg-accent text-[18px] h-[4rem] w-[8rem] rounded-full mt-[3rem]'>Apply</button>
                   </div>
-                  <label className='text-[19px] font-medium leading-[4rem]'>Job Description</label>
-                  <p className='font-regular'>{currentJob?.attributes.description}</p>
-                  <br />
-                  <br />
-                  <br />
-                  <label className='text-[19px] font-medium leading-[4rem]'>Qualifications</label>
-                  <div className='list-disc' dangerouslySetInnerHTML={getMarkdownText(data?.data?.data?.find((job: any, i: number) => i === index).attributes?.qualifications)}></div>
-                  <br /> <br />
-                  <label className='text-[19px] font-medium leading-[4rem] '>Job Duties</label>
-                  <div className='' dangerouslySetInnerHTML={getMarkdownText(data?.data?.data?.find((job: any, i: number) => i === index).attributes?.job_duties)}></div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className='w-[75vw] relative left-[25vw] top-0  bg-gradient-to-r from-cyan-500/10 to-blue-500/10 text-body'>
+          <div className='grid grid-cols-9 '>
+            <div className='col-start-1 col-span-7 bg-white border m-[3rem] rounded-lg p-[5rem]'>
+              <div className=''>
+                <div className='mb-[2rem]'>
+                  <div className='mb-[2rem]'>
+                    <h1 className='text-[24px] font-medium tracking-[-0.3px] leading-[3rem]'>{currentJob?.attributes.job_title}</h1>
+                    <h3 className='text-[18px] font-medium text-neutral/70'>{`${currentJob?.attributes.salary}`}</h3>
+                  </div>
+
+                  <div className='flex items-center py-[2rem] border-t'>
+                    <div className='bg-warning/20 rounded-lg w-[5rem] h-[5rem] flex items-center justify-center mr-[1rem]'>
+                      <BuildingOffice2Icon className='h-9 w-9 stroke-[1px]' />
+                    </div>
+                    <div className='flex flex-col'>
+                      <h6 className='font-medium text-[16px] leading-[2rem]'>{currentJob?.attributes.company_id?.data?.attributes?.company_name}</h6>
+                      <h6 className='font-medium text-[15px] leading-[2rem] text-neutral/60'>Branding experiences and radical collaboration</h6>
+                    </div>
+                  </div>
+
+                  <div className='border-t border-b flex py-[1rem] mb-[3rem]'>
+                    <div className='w-[14.5rem] flex items-center justify-between'>
+                      <button className='border border-neutral/40  rounded-full  py-[8px] px-[16px]  h-[4vh] font-medium text-[16px] flex items-center justify-start'>Apply</button>
+                      <button className='border border-neutral/40  rounded-full  py-[8px] px-[16px]  h-[4vh] font-medium text-[16px] flex items-center justify-start'>Report</button>
+                    </div>
+                  </div>
                 </div>
+                {/* <label className='text-[19px] font-medium leading-[4rem]'>Job Description</label> */}
+                <p className='font-regular text-[15px]'>{currentJob?.attributes.description}</p>
+                <br />
+                <label className='text-body font-medium leading-[2rem]'>Qualifications</label>
+                <div
+                  className='list-disc font-regular text-[15px]'
+                  dangerouslySetInnerHTML={getMarkdownText(data?.data?.data?.find((job: any, i: number) => i === index).attributes?.qualifications)}
+                ></div>
+                <br />
+                <label className='text-body font-medium leading-[2rem] '>Job Duties</label>
+                <div
+                  className='list-disc font-regular text-[15px]'
+                  dangerouslySetInnerHTML={getMarkdownText(data?.data?.data?.find((job: any, i: number) => i === index).attributes?.job_duties)}
+                ></div>
               </div>
             </div>
           </div>

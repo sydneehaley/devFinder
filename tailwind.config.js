@@ -25,8 +25,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
-        theme: 'Satoshi-Variable',
-        logo: 'Logo',
+        theme: 'Theme',
       },
       // colors: {
       //   ...colors,

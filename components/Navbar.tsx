@@ -25,7 +25,7 @@ export default function Navbar(session: any) {
   }, []);
 
   return (
-    <div className='w-full h-[8vh] border-b bg-transparent dark:border-neutral-400/10 flex justify-center items-center antialiased px-[3rem] '>
+    <div className='w-full bg-base-100 sticky z-50 top-0 h-[8vh] border-b  dark:border-neutral-400/10 flex justify-center items-center antialiased px-[3rem] '>
       <div className='w-full flex justify-start items-center '>
         <div className='w-[25%] h-[9vh] flex items-center justify-start'>
           <div className='flex items-center'>
