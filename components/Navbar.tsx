@@ -8,21 +8,23 @@ import { location } from '../components/Location';
 import DropdownMenu from './DropdownMenu';
 import Signin from './Signin';
 
-export default function Navbar(session: any) {
-  const [cityData, setCityData] = useState<any>(null);
-  const [city, setCity] = useState<any>(null);
+export default function Navbar() {
+  // const [cityData, setCityData] = useState<any>(null);
+  // const [city, setCity] = useState<any>(null);
 
-  useEffect(() => {
-    if ('geolocation' in navigator) {
-      console.log('Available');
-      navigator.geolocation.getCurrentPosition(function (position) {
-        location(position.coords.latitude, position.coords.longitude).then((res) => {
-          setCityData(res.features[0].properties);
-          setCity(res.features[0].properties.city);
-        });
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if ('geolocation' in navigator) {
+  //     console.log('Available');
+  //     navigator.geolocation.getCurrentPosition(function (position) {
+  //       location(position.coords.latitude, position.coords.longitude).then((res) => {
+  //         setCityData(res.features[0].properties);
+  //         setCity(res.features[0].properties.city);
+  //       });
+  //     });
+  //   }
+  // }, []);
+
+  console.log('state here...');
 
   return (
     <div className='w-full bg-base-100 sticky z-50 top-0 h-[8vh] border-b  dark:border-neutral-400/10 flex justify-center items-center antialiased px-[3rem] '>

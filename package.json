@@ -65,6 +65,7 @@
     "react-dom": "^18.2.0",
     "react-geocode": "^0.2.3",
     "react-icons": "^4.8.0",
+    "react-spinners": "^0.13.8",
     "request": "^2.88.2",
     "sass": "^1.54.3",
     "server-only": "^0.0.1",
