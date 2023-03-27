@@ -1192,6 +1192,10 @@ html,
   height: 5vh;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .h-full {
   height: 100%;
 }
@@ -1240,10 +1244,6 @@ html,
   height: 6vh;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
 .min-h-full {
   min-height: 100%;
 }
@@ -1276,6 +1276,10 @@ html,
   width: 22%;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .w-\[25vw\] {
   width: 25vw;
 }
@@ -1290,10 +1294,6 @@ html,
 
 .w-9 {
   width: 2.25rem;
-}
-
-.w-\[60\%\] {
-  width: 60%;
 }
 
 .w-6 {
@@ -1334,10 +1334,6 @@ html,
 
 .w-\[70\%\] {
   width: 70%;
-}
-
-.w-screen {
-  width: 100vw;
 }
 
 .max-w-\[200px\] {
@@ -1461,6 +1457,14 @@ html,
   border-width: 1px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
+.border-\[3px\] {
+  border-width: 3px;
+}
+
 .border-t {
   border-top-width: 1px;
 }
@@ -1508,10 +1512,6 @@ html,
   background-color: hsl(var(--nc) / 0.1);
 }
 
-.bg-base-200\/50 {
-  background-color: hsl(var(--b2, var(--b1)) / 0.5);
-}
-
 .bg-warning\/20 {
   background-color: hsl(var(--wa) / 0.2);
 }
@@ -1533,6 +1533,14 @@ html,
 .bg-green-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+}
+
+.bg-base-200\/20 {
+  background-color: hsl(var(--b2, var(--b1)) / 0.2);
+}
+
+.bg-base-200\/30 {
+  background-color: hsl(var(--b2, var(--b1)) / 0.3);
 }
 
 .bg-opacity-80 {
@@ -1615,6 +1623,10 @@ html,
   padding-bottom: 5rem;
 }
 
+.pb-\[3rem\] {
+  padding-bottom: 3rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -1665,10 +1677,6 @@ html,
 
 .text-\[15px\] {
   font-size: 15px;
-}
-
-.text-\[19px\] {
-  font-size: 19px;
 }
 
 .text-\[17px\] {
@@ -1742,6 +1750,11 @@ html,
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .text-neutral\/70 {
   color: hsl(var(--n) / 0.7);
 }
@@ -1770,12 +1783,6 @@ html,
 
 .opacity-100 {
   opacity: 1;
-}
-
-.shadow-md {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .shadow-xl {
@@ -1912,6 +1919,18 @@ a {
 
 .placeholder\:text-white\/40::placeholder {
   color: rgb(255 255 255 / 0.4);
+}
+
+.hover\:border-2:hover {
+  border-width: 2px;
+}
+
+.hover\:border:hover {
+  border-width: 1px;
+}
+
+.hover\:border-\[3px\]:hover {
+  border-width: 3px;
 }
 
 .hover\:border-neutral\/40:hover {
