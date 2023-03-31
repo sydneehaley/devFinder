@@ -24,10 +24,8 @@ export default function Navbar() {
   //   }
   // }, []);
 
-  console.log('state here...');
-
   return (
-    <div className='w-full bg-base-100 sticky z-50 top-0 h-[8vh] border-b  dark:border-neutral-400/10 flex justify-center items-center antialiased px-[3rem] '>
+    <div className='w-full bg-base-100 sticky top-0 h-[8vh] border-b z-[50] dark:border-neutral-400/10 flex justify-center items-center antialiased px-[3rem] '>
       <div className='w-full flex justify-start items-center '>
         <div className='w-[25%] h-[9vh] flex items-center justify-start'>
           <div className='flex items-center'>
@@ -48,7 +46,7 @@ export default function Navbar() {
         </div>
 
         <div className='w-[50%] flex items-center justify-center'>
-          <button className='bg-neutral rounded-full flex items-center justify-center text-[18px] font-medium text-base-100 w-[18%] p-[0.5rem]'>
+          <button className='bg-neutral rounded-full flex items-center justify-center text-[18px] font-regular text-base-100 w-[18%] p-[0.5rem]'>
             Jobs <ChevronDownIcon className='ml-[1rem] h-5 w-5 stroke-[3px]' />
           </button>
         </div>
@@ -56,11 +54,14 @@ export default function Navbar() {
         <div className='w-[25%] h-[9vh] flex items-center justify-end'>
           <ul className='flex items-center justify-between'>
             <li className='flex'>
-              <GlobeAltIcon className='w-7 h-7 mr-[2rem] stroke-[1px]' />
+              <MagnifyingGlassIcon className='w-7 h-7 mr-[2rem] stroke-[1.5px]' />
+            </li>
+            <li className='flex'>
+              <GlobeAltIcon className='w-7 h-7 mr-[2rem] stroke-[1.5px]' />
             </li>
             <li>
-              <Bars3Icon className='w-9 h-9 stroke-[1px]' />
-            </li>{' '}
+              <Bars3Icon className='w-9 h-9 stroke-[1.5px]' />
+            </li>
           </ul>
         </div>
       </div>
