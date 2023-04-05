@@ -14,7 +14,7 @@ export default async function Index() {
     <div className='w-full text-neutral flex flex-col items-center justify-center'>
       <Navbar />
       <div className='w-full'>
-        <List data={data} />{' '}
+        <List data={data} />
       </div>
     </div>
   );

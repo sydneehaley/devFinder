@@ -7,6 +7,7 @@ import { TbBriefcase } from 'react-icons/tb';
 import { location } from '../components/Location';
 import DropdownMenu from './DropdownMenu';
 import Signin from './Signin';
+import { Menu } from '@headlessui/react';
 
 export default function Navbar() {
   // const [cityData, setCityData] = useState<any>(null);
@@ -25,7 +26,7 @@ export default function Navbar() {
   // }, []);
 
   return (
-    <div className='w-full bg-base-100 sticky top-0 h-[8vh] border-b z-[50] dark:border-neutral-400/10 flex justify-center items-center antialiased px-[3rem] '>
+    <div className='w-full bg-base-100 sticky top-0 h-[8vh] z-[50] border-b  dark:border-neutral-400/10 flex justify-center items-center antialiased px-[3rem] '>
       <div className='w-full flex justify-start items-center '>
         <div className='w-[25%] h-[9vh] flex items-center justify-start'>
           <div className='flex items-center'>
@@ -46,9 +47,27 @@ export default function Navbar() {
         </div>
 
         <div className='w-[50%] flex items-center justify-center'>
-          <button className='bg-neutral rounded-full flex items-center justify-center text-[18px] font-regular text-base-100 w-[18%] p-[0.5rem]'>
-            Jobs <ChevronDownIcon className='ml-[1rem] h-5 w-5 stroke-[3px]' />
-          </button>
+          <Menu>
+            <Menu.Button className='bg-neutral cursor-pointer rounded-full flex items-center justify-center text-[18px] font-medium text-base-100 w-[18%] p-[0.5rem]'>
+              Jobs <ChevronDownIcon className='ml-[1rem] h-5 w-5 stroke-[3px]' />
+            </Menu.Button>
+            <Menu.Items className='absolute bg-base-100 border rounded-md shadow-lg w-[20rem] top-[7vh] flex flex-col divide-y divide-solid child:h-[5rem] child:flex child:items-center child:justify-center child:text-[16px]'>
+              <Menu.Item>
+                {({ active }) => (
+                  <a className={`${active && 'bg-neutral text-base-100'}`} href='/account-settings'>
+                    Companies
+                  </a>
+                )}
+              </Menu.Item>
+              <Menu.Item>
+                {({ active }) => (
+                  <a className={`${active && 'bg-neutral text-base-100'}`} href='/account-settings'>
+                    Resources
+                  </a>
+                )}
+              </Menu.Item>
+            </Menu.Items>
+          </Menu>
         </div>
 
         <div className='w-[25%] h-[9vh] flex items-center justify-end'>
