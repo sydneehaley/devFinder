@@ -5,7 +5,8 @@ import { useEffect } from 'react';
 export default function Error({ error, reset }: { error: Error; reset: () => void }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error('my custom error');
+    const errorMsg = error;
+    console.error(errorMsg);
   }, [error]);
 
   return (
